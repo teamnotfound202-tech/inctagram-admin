@@ -1,18 +1,23 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript' // если проект на TS
+import prettier from 'eslint-config-prettier/flat'
 
-const eslintConfig = defineConfig([
+// Базовый набор: Next Core Web Vitals + TypeScript (если нужен) + отключение формат-правил в пользу Prettier
+export default defineConfig([
   ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
+  ...nextTs, // убери строку, если у тебя JS без TS
+  prettier, // гасит конфликтующие формат-правила ESLint
 
-export default eslintConfig;
+  // Перенеси ПАТТЕРНЫ из .eslintignore сюда и затем удали .eslintignore
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'build/**',
+    'dist/**',
+    'coverage/**',
+    'node_modules/**',
+    'next-env.d.ts',
+    'public/**/*.min.*',
+  ]),
+])
