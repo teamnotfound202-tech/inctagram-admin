@@ -1,0 +1,49 @@
+@use '@/shared/styles/variables' as *;
+
+.header {
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid $dark-100;
+  z-index: 10;
+  background-color: $dark-700;
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.headerTitle {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 138%;
+  color: $light-100;
+  cursor: pointer;
+}
+
+.headerSmallTitle {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
+}
+
+.headerGroupContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonGroupLogin {
+  display: flex;
+
+  & > *:nth-child(1) {
+    margin-right: 36px;
+  }
+
+  & > *:nth-child(2) {
+    margin-right: 24px;
+  }
+}
