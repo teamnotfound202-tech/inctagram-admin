@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AngularSettings">
+    <option name="useTypesFromServer" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00881b7d-460b-42ca-9ee2-18547d1401f3" name="Changes" comment="Users List fix format">
+      <change afterPath="$PROJECT_DIR$/src/porocesses/AppWrapper/ui/AppWrapper.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/porocesses/AppWrapper/ui/AppWrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/porocesses/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/config/sideBarItems/sideBarData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/lib/hooks/useChangeModal.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/ModalSettingUser/ModalSettingUser.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/ModalSettingUser/ModalSettingUser.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/ModalSettingUser/icons/ban.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/ModalSettingUser/icons/delete.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/ModalSettingUser/icons/more.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/Sidebar.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/Sidebar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/DinamicIcon/DinamicIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/SidebarItem.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/SidebarItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/icons/payments.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/icons/posts.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/icons/statistics.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Sidebar/SidebarItem/icons/users.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/TableUserItem/TableUserItem.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/TableUserItem/TableUserItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/config/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/config/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/config/routes/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/config/routes/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/lib/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/lib/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/ui/Table/Table.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/ui/Table/Table.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/ui/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/ui/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="FSD-setting" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOQIVFgc6v6hoV&quot;,
+        &quot;number&quot;: 2
+      },
+      &quot;lastSeen&quot;: 1761576962045
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOQIVFgc6v1XF4&quot;,
+        &quot;number&quot;: 1
+      },
+      &quot;lastSeen&quot;: 1761577035744
+    }
+  ]
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/teamnotfound202-tech/inctagram-admin.git",
+    "accountId": "55cdfe50-6a00-4464-9150-0d2920217adf"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="34VVqNnVSdEPVwqTFpFhasKV5tK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "FSD-sructure",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/Users/a1/my-projects/inctagram-admin/src/shared/ui/ModalSettingUser/icons",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "npm.format.executor": "Run",
+    "npm.lint-FSD.executor": "Run",
+    "npm.lint.executor": "Run",
+    "npm.lint:fix.executor": "Run",
+    "npm.start.executor": "Run",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/shared/ui/ModalSettingUser/icons" />
+      <recent name="$PROJECT_DIR$/src/shared/config" />
+      <recent name="$PROJECT_DIR$/src/widgets" />
+      <recent name="$PROJECT_DIR$/src/shared/lib/components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/shared/ui/TableUserItem" />
+      <recent name="$PROJECT_DIR$/src/shared/ui/Sidebar" />
+      <recent name="$PROJECT_DIR$/src/shared/ui" />
+      <recent name="$PROJECT_DIR$/src/widgets/Sidebar" />
+      <recent name="$PROJECT_DIR$/src/widgets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="format" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint-FSD" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint-FSD" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint:fix" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:fix" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.lint" />
+        <item itemvalue="npm.lint:fix" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.format" />
+        <item itemvalue="npm.lint-FSD" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-75c7c973e13d-JavaScript-WS-253.27864.34" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00881b7d-460b-42ca-9ee2-18547d1401f3" name="Changes" comment="" />
+      <created>1761298915211</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761298915211</updated>
+      <workItem from="1761298916381" duration="13726000" />
+      <workItem from="1761641866008" duration="1099000" />
+      <workItem from="1761642989337" duration="55000" />
+      <workItem from="1761643060346" duration="11085000" />
+      <workItem from="1761657735551" duration="71000" />
+      <workItem from="1761658264692" duration="5733000" />
+      <workItem from="1761664032909" duration="455000" />
+      <workItem from="1761664500308" duration="438000" />
+    </task>
+    <task id="LOCAL-00001" summary="Users List add">
+      <option name="closed" value="true" />
+      <created>1761644381352</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761644381352</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Users List fix format">
+      <option name="closed" value="true" />
+      <created>1761644576556</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761644576556</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Users List add" />
+    <MESSAGE value="Users List fix format" />
+    <option name="LAST_COMMIT_MESSAGE" value="Users List fix format" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/shared/ui/TableUserItem/TableUserItem.tsx</url>
+          <line>15</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
