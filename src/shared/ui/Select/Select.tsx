@@ -24,21 +24,21 @@ export type SelectBoxProps = {
 }
 
 export const SelectBox: React.FC<SelectBoxProps> = ({
-                                                      options,
-                                                      value,
-                                                      defaultValue = '',
-                                                      onValueChange,
-                                                      placeholder,
-                                                      label,
-                                                      error,
-                                                      disabled = false,
-                                                      required = false,
-                                                      className = '',
-                                                      name,
-                                                      id,
-                                                      fullWidth = true,
-                                                      type = 'default',
-                                                    }) => {
+  options,
+  value,
+  defaultValue = '',
+  onValueChange,
+  placeholder,
+  label,
+  error,
+  disabled = false,
+  required = false,
+  className = '',
+  name,
+  id,
+  fullWidth = true,
+  type = 'default',
+}) => {
   const [internalValue, setInternalValue] = useState(defaultValue)
   const currentValue = value !== undefined ? value : internalValue
 
