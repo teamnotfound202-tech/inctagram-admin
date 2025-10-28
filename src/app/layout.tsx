@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@radix-ui/themes/styles.css'
 import './globals.css'
+import {AppWrapper} from '@/porocesses'
 
 import { AlertsProvider } from '@/shared/ui'
 import { Header } from '@/widgets/Header'
@@ -35,7 +36,7 @@ export default function RootLayout({
         <AlertsProvider>
           <Header />
           <main className={'main'}>
-            {children}
+            <AppWrapper>{children}</AppWrapper>
             <Toaster />
           </main>
         </AlertsProvider>

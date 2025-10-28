@@ -1,7 +1,8 @@
 export const Path = {
   Home: '/',
   SignIn: '/login',
-  usersList: '/users-list',
-  paymentsList: '/payments-list',
-  postsList: '/post-list',
+  UsersList: '/users-list',
+  PaymentsList: '/payments-list',
+  PostsList: '/post-list',
+  Statistics: '/statistics',
 }
