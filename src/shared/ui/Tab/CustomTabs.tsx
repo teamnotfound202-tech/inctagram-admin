@@ -40,7 +40,7 @@ export const CustomTabs: React.FC<TabsProps> = ({
       activationMode={activationMode}
     >
       <Tabs.List className={styles.List} aria-label="Tabs navigation">
-        {tabs.map(tab => (
+        {tabs.map((tab) => (
           <Tabs.Trigger
             key={tab.value}
             className={styles.Trigger}

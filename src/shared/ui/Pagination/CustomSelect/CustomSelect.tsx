@@ -15,11 +15,7 @@ type CustomSelectProps = {
   placeholder?: string
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({
-  options,
-  value,
-  onChange,
-}) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({ options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false)
   const selectRef = useRef<HTMLDivElement | null>(null)
 
@@ -39,7 +35,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     setIsOpen(false)
   }
 
-  const selectedOption = options.find(opt => opt.value === value)
+  const selectedOption = options.find((opt) => opt.value === value)
 
   return (
     <div className={`${s.container} ${isOpen ? s.open : ''}`} ref={selectRef}>
@@ -54,7 +50,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 
       {isOpen && (
         <div className={s.dropdown}>
-          {options.map(option => (
+          {options.map((option) => (
             <div
               key={option.value}
               className={`${s.option} ${value === option.value ? s.selected : ''}`}

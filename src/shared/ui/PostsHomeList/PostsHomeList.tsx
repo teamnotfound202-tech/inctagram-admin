@@ -6,14 +6,12 @@ type Props = {
   userPosts: Post[]
 }
 
-export const PostsHomeList = ({userPosts}: Props) => {
+export const PostsHomeList = ({ userPosts }: Props) => {
   return (
     <ul className={s.userPostsList}>
-      {
-        userPosts.slice(0,4).map(post => (
-          <PostHomeItem key={post.id} post={post} />
-        ))
-      }
+      {userPosts.slice(0, 4).map((post) => (
+        <PostHomeItem key={post.id} post={post} />
+      ))}
     </ul>
   )
 }

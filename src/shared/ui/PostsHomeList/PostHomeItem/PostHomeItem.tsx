@@ -1,11 +1,11 @@
 'use client'
 
 import s from './PostHomeItem.module.scss'
-import {Post} from '@/features/publicUserApi/types'
-import 'swiper/css';
-import {useState} from 'react'
+import { Post } from '@/features/publicUserApi/types'
+import 'swiper/css'
+import { useState } from 'react'
 import Link from 'next/link'
-import {LinkContent} from "@/views/ProfilePosts/PostItem/LinkContent/LinkContent";
+import { LinkContent } from '@/views/ProfilePosts/PostItem/LinkContent/LinkContent'
 import Avatar from '../../../../entities/user/ui/Avatar/Avatar'
 import { getTimeDifference } from '@/shared/lib/utils/getTimeDifference'
 import { Button } from '@/shared/ui'
@@ -17,8 +17,7 @@ type Props = {
 const countLetter = 82
 const maxLetters = 210
 
-export const PostHomeItem = ({post}: Props) => {
-
+export const PostHomeItem = ({ post }: Props) => {
   const [text, setText] = useState('Show more')
   const postDescriptionLength =
     post && post.description && post.description.length > countLetter
@@ -27,12 +26,10 @@ export const PostHomeItem = ({post}: Props) => {
   const [textDescription, setTextDescription] = useState(postDescriptionLength)
 
   const handleChangeHeightText = (value?: number) => {
-
-    if (value){
-        setTimeout(()=>{
-            setTextDescription(post.description.slice(0, value) + '...')
-        },390)
-
+    if (value) {
+      setTimeout(() => {
+        setTextDescription(post.description.slice(0, value) + '...')
+      }, 390)
     } else {
       setTextDescription(post.description.slice(0, countLetter) + '...')
     }
