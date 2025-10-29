@@ -28,16 +28,14 @@ export const Sidebar = () => {
       default:
         link = ''
     }
-    console.log('link cre', link)
     return link
   }
 
   return (
     <ul className={s.sidebar}>
-      {sideBarData?.map((item, index) => {
-        console.log(index)
+      {sideBarData?.map((item) => {
         const link = linkCreator(item.text)
-        console.log('link', link)
+
         return (
           <SidebarItem
             key={item.key}

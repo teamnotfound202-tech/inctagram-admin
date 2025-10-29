@@ -131,6 +131,7 @@ export const UsersTable = () => {
             <TableH>Username</TableH>
             <TableH>Date added</TableH>
             <TableH />
+            <TableH />
           </TableRow>
         </TableHead>
         <TableBody>{shownUsers}</TableBody>

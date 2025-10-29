@@ -1,0 +1,1 @@
+export { AgreementsType, BanUserType } from './global';
