@@ -9,18 +9,11 @@ import Link from 'next/link'
 import {ModalSettingUser} from "@/shared/ui";
 import {useState} from 'react'
 import {ModalAgreement} from '@/shared/ui';
-import {BanUserType, AgreementsType} from '@/shared/shared-types'
+import type { AgreementsType, UserType } from '@/shared/shared-types'
 
 type Props = {
     profileLink: string
-    user:  {
-        id: number,
-        profile: string,
-        email: string,
-        userName: string,
-        createdAt: string,
-        userBan: BanUserType,
-    },
+    user:  UserType
 }
 
 export const TableUserItem = ({profileLink, user}: Props) => {

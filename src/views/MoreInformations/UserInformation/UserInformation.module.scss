@@ -1,0 +1,67 @@
+@use './../../../shared/styles/variables' as *;
+
+.container {
+  padding: 24px 0;
+  width: 100%;
+}
+
+.btn {
+  color: $light-100;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 24px;
+}
+
+.arrowText {
+  color: $light-100;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 171%;
+  text-align: center;
+}
+
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wrapperProfile {
+  display: flex;
+  gap: 24px;
+}
+
+.userFName {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 180%;
+  color: $light-100;
+}
+
+.userLName {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: $light-100;
+}
+
+.userNameProfile {
+  color: $light-100;
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfo {
+  color: $light-100;
+  display: flex;
+  gap: 54px;
+}
+.userIdAndDate {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  color: $light-900;
+}

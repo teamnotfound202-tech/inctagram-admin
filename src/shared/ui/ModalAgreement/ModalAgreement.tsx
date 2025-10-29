@@ -7,7 +7,7 @@ import {AgreementsType} from '@/shared/shared-types'
 
 type Props = {
     type: AgreementsType
-    userName: 'string'
+    userName: string
     handleCloseAgreementModal: (value: boolean) => void
     onClick: () => void
 }
@@ -57,7 +57,6 @@ export const ModalAgreement = ({
                             { value: 'Another reason', label: 'Another reason' },
                         ]}
                         name={'select ban'}
-                        type={'text'}
                         defaultValue={''}
                         fullWidth={true}
                         placeholder={'Reason for ban'}

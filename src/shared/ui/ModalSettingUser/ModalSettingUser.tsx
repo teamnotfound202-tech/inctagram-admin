@@ -6,14 +6,16 @@ import DeleteIcon from './icons/delete.svg'
 import MoreIcon from './icons/more.svg'
 import s from './ModalSettingUser.module.scss'
 import {useChangeModal} from '@/shared/lib'
-import {AgreementsType, BanUserType} from '@/shared/types'
+import { Path } from '@/shared/config'
+import Link from 'next/link'
+import { AgreementsType, BanUserType } from '@/shared/shared-types'
 
 type Props = {
     // userId: number
     handleChangeModal: (value: boolean) => void
     isOpen: boolean
     handleOpenAgreementModal: (value: boolean, type: AgreementsType) => void
-    userBan: BanUserType
+    userBan: BanUserType|null
 }
 
 export const ModalSettingUser = ({
@@ -42,10 +44,10 @@ export const ModalSettingUser = ({
                 </button>
                 )
             }
-            <button className={s.modalSettingBtn} onClick={() => {}}>
+            <Link className={s.modalSettingBtn} href={Path.MoreInformations}>
                 <MoreIcon/>
                 More Information
-            </button>
+            </Link>
         </div>
     )
 }

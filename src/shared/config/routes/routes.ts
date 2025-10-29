@@ -5,4 +5,5 @@ export const Path = {
   PaymentsList: '/payments-list',
   PostsList: '/post-list',
   Statistics: '/statistics',
+  MoreInformations: '/more-informations'
 }

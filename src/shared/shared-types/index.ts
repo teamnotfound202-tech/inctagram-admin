@@ -1,1 +1,1 @@
-export { AgreementsType, BanUserType } from './global';
+export type { AgreementsType, BanUserType, UserType } from './global';
