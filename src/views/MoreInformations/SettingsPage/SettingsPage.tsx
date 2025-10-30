@@ -6,8 +6,8 @@ import { useEffect } from 'react'
 import { UploadedPhotos } from '@/views/MoreInformations/SettingsPage/SettingPageItems/UploadedPhotos/UploadedPhotos'
 import { Payments } from '@/views/MoreInformations/SettingsPage/SettingPageItems/Payments/Payments'
 import { Followers } from '@/views/MoreInformations/SettingsPage/SettingPageItems/Followers/Followers'
-import { Following } from '@/views/MoreInformations/SettingsPage/SettingPageItems/Following/Following'
 import { SettingsNavLinks } from '@/views/MoreInformations/SettingsPage/SettingsNavLinks/SettingsNavLinks'
+import { Following } from '@/views/MoreInformations/SettingsPage/SettingPageItems/Following/Following'
 
 export const SettingsPage = () => {
   const searchParams = useSearchParams()
