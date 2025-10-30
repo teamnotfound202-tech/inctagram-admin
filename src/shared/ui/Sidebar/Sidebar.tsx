@@ -43,7 +43,6 @@ export const Sidebar = () => {
             link={link}
             spanText={item.text}
             isDisabled={item.isDisabled}
-            {...(item.onclick && { onClickAction: () => {} })}
           />
         )
       })}

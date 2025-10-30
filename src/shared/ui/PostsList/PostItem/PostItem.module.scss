@@ -3,12 +3,18 @@
 .postItem {
   position: relative;
   width: 234px;
+  color: $light-100;
+}
+
+.userInfoWrapper {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .userInfo {
-  margin-top: 12px;
-  margin-bottom: 12px;
-
   display: flex;
   align-items: center;
   gap: 12px;
@@ -44,4 +50,10 @@
     outline: none;
     border: none;
   }
+}
+
+.userInfoBtn {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }

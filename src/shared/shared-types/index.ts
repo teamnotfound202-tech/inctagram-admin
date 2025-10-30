@@ -1,1 +1,6 @@
-export type { AgreementsType, BanUserType, UserType } from './global';
+export type {
+  AgreementsType,
+  BanUserType,
+  UserType,
+  PostType,
+} from './global';
