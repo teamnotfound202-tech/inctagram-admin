@@ -3,8 +3,7 @@ import { SuperPagination, Table, TableBody, TableDataCell, TableH, TableHead, Ta
 import { useState } from 'react'
 import s from './Following.module.scss'
 import { ISOStringFormat } from 'date-fns'
-import ArrowSortUp from './../icons/ArrowSortUp.svg'
-import ArrowSortDown from './../icons/ArrowSortDown.svg'
+import { SortButton } from '@/shared/ui/SortButton/SortButton'
 
 type Follow = {
   userId: number,
@@ -139,18 +138,12 @@ export const Following = () => {
             <TableH>User ID</TableH>
             <TableH className={s.profLinkTable}>
               Profile link
-              <div className={s.arrowSort}>
-                <ArrowSortUp/>
-                <ArrowSortDown/>
-              </div>
+              <SortButton/>
             </TableH>
             <TableH>Username</TableH>
             <TableH className={s.profLinkTable}>
               Subscription Date
-              <div className={s.arrowSort}>
-                <ArrowSortUp/>
-                <ArrowSortDown/>
-              </div>
+              <SortButton/>
             </TableH>
           </TableRow>
         </TableHead>
