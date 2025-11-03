@@ -6,14 +6,10 @@ type Props = {
   text: string
 }
 
-export const RadioItem = ({ text, id}: Props) => {
+export const RadioItem = ({ text, id }: Props) => {
   return (
     <div className={s.wrapper}>
-      <RadioGroup.Item
-        className={s.Item}
-        value={id}
-        id={id}
-      >
+      <RadioGroup.Item className={s.Item} value={id} id={id}>
         <RadioGroup.Indicator className={s.Indicator} />
       </RadioGroup.Item>
       <label className={s.Label} htmlFor={id}>

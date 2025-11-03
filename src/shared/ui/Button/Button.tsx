@@ -24,7 +24,7 @@ export const Button = ({
     s.button,
     s[variant],
     fullWidth && s.fullWidth,
-    className && className
+    className && className,
   )
   const Component = asChild ? Slot : 'button'
   return (

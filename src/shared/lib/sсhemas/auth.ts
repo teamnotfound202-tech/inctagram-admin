@@ -1,9 +1,7 @@
 import { z } from 'zod'
 
 export const loginSchema = z.object({
-  email: z
-    .email('The email must match the format example@example.com')
-    .min(1, 'Enter your email'),
+  email: z.email('The email must match the format example@example.com').min(1, 'Enter your email'),
 
   password: z
     .string()
@@ -18,7 +16,6 @@ export const loginSchema = z.object({
     .regex(/[A-Z]/, 'Must contain uppercase letter (A-Z)'),
 })
 
-
 export type LoginInputs = z.infer<typeof loginSchema>
 
 export const createNewPasswordSchema = z
@@ -29,7 +26,7 @@ export const createNewPasswordSchema = z
       .max(20, 'Password must be at most 20 characters'),
     passwordConfirmation: z.string(),
   })
-  .refine(data => data.newPassword === data.passwordConfirmation, {
+  .refine((data) => data.newPassword === data.passwordConfirmation, {
     message: 'The passwords must match',
     path: ['passwordConfirmation'],
   })
