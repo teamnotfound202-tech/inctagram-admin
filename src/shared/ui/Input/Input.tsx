@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       autoComplete,
     },
-    ref
+    ref,
   ) => {
     const classNameInput = clsx(s.Input, { [s.inputError]: error })
     const classNameLabel = clsx(s.inputLabel, isDisabled && s.labelDisabled)
@@ -101,7 +101,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && <span className={s.inputErrorText}>{error}</span>}
       </div>
     )
-  }
+  },
 )
 
 Input.displayName = 'Input'

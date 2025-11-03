@@ -5,7 +5,6 @@ import styles from './Select.module.scss'
 import clsx from 'clsx'
 import { SelectOption, SelectOptionList } from '@/shared/ui/Select/SelectOptionsList'
 
-
 export type SelectBoxProps = {
   options: SelectOption[]
   value?: string
@@ -24,24 +23,23 @@ export type SelectBoxProps = {
 }
 
 export const SelectBox: React.FC<SelectBoxProps> = ({
-                                                      options,
-                                                      value,
-                                                      defaultValue = '',
-                                                      onValueChange,
-                                                      placeholder,
-                                                      label,
-                                                      error,
-                                                      disabled = false,
-                                                      required = false,
-                                                      className = '',
-                                                      name,
-                                                      id,
-                                                      fullWidth = true,
-                                                      type = 'default',
-                                                    }) => {
+  options,
+  value,
+  defaultValue = '',
+  onValueChange,
+  placeholder,
+  label,
+  error,
+  disabled = false,
+  required = false,
+  className = '',
+  name,
+  id,
+  fullWidth = true,
+  type = 'default',
+}) => {
   const [internalValue, setInternalValue] = useState(defaultValue)
   const currentValue = value !== undefined ? value : internalValue
-
 
   const handleValueChange = useCallback(
     (newValue: string) => {
@@ -50,11 +48,12 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
       }
       onValueChange?.(newValue)
     },
-    [value, onValueChange]
+    [value, onValueChange],
   )
 
   const selectId = id || name
-  const displayError = error || (required && !currentValue ? 'Поле обязательно для заполнения' : undefined)
+  const displayError =
+    error || (required && !currentValue ? 'Поле обязательно для заполнения' : undefined)
   const triggerId = selectId ? `${selectId}-trigger` : undefined
   const labelId = selectId ? `${selectId}-label` : undefined
 
@@ -83,7 +82,15 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
       {displayError && <div className={styles.errorMessage}>{displayError}</div>}
 
       {/* Скрытое поле для форм */}
-      {name && <input type="hidden" name={name} value={currentValue ? currentValue : ''} disabled={disabled} onChange={() => {}} />}
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          value={currentValue ? currentValue : ''}
+          disabled={disabled}
+          onChange={() => {}}
+        />
+      )}
     </div>
   )
 }

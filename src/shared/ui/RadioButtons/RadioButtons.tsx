@@ -1,11 +1,11 @@
 import { RadioGroup } from 'radix-ui'
 import s from './RadioButtons.module.scss'
 
- type Values = {
-    defaultValue: string
-    changesValue: (value: string) => void
-    children: React.ReactNode
- }
+type Values = {
+  defaultValue: string
+  changesValue: (value: string) => void
+  children: React.ReactNode
+}
 
 export const RadioButtons = ({ children, defaultValue, changesValue }: Values) => {
   return (

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from './Select.module.scss'
 import ChevronDownIconUpDown from './icon/ChevronDownIconUpDown.svg'
 import clsx from 'clsx'
@@ -27,17 +27,17 @@ export type SelectOptionListProps = {
 }
 
 export const SelectOptionList: React.FC<SelectOptionListProps> = ({
-                                                                    options,
-                                                                    value,
-                                                                    onValueChange,
-                                                                    placeholder = 'Выберите опцию',
-                                                                    className = '',
-                                                                    disabled = false,
-                                                                    id,
-                                                                    'aria-labelledby': ariaLabelledBy,
-                                                                    fullWidth = true,
-                                                                    type = 'default',
-                                                                  }) => {
+  options,
+  value,
+  onValueChange,
+  placeholder = 'Выберите опцию',
+  className = '',
+  disabled = false,
+  id,
+  'aria-labelledby': ariaLabelledBy,
+  fullWidth = true,
+  type = 'default',
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const selectRef = useRef<HTMLDivElement>(null)
 
@@ -62,7 +62,7 @@ export const SelectOptionList: React.FC<SelectOptionListProps> = ({
     }
   }
 
-  const selectedOption = options.find(option => option.value === value)
+  const selectedOption = options.find((option) => option.value === value)
   const displayValue = selectedOption ? (
     <div className={styles.itemContent}>
       {selectedOption.icon}
@@ -101,7 +101,7 @@ export const SelectOptionList: React.FC<SelectOptionListProps> = ({
       {isOpen && (
         <div className={styles.dropdown}>
           <div className={styles.viewport}>
-            {options.map(option => (
+            {options.map((option) => (
               <div
                 key={option.value}
                 className={clsx(styles.item, {
@@ -122,4 +122,3 @@ export const SelectOptionList: React.FC<SelectOptionListProps> = ({
     </div>
   )
 }
-

@@ -1,4 +1,4 @@
-import {Metadata} from "next";
+import { Metadata } from 'next'
 
-export const metadata: Metadata = {title: 'Login'};
-export {LoginPage as default} from '@/views'
+export const metadata: Metadata = { title: 'Login' }
+export { LoginPage as default } from '@/views'

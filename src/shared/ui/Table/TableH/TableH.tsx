@@ -1,15 +1,11 @@
-import {ComponentPropsWithoutRef, forwardRef} from "react";
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 import s from './TableH.module.scss'
 
-export const TableH = forwardRef<HTMLTableHeaderCellElement,
-    ComponentPropsWithoutRef<'th'>
->(({className, ...rest}, ref) => {
+export const TableH = forwardRef<HTMLTableHeaderCellElement, ComponentPropsWithoutRef<'th'>>(
+  ({ className, ...rest }, ref) => {
     const computedStyles = s.tableH + (className ? ` ${className}` : '')
-    return (
-        <th ref={ref} {...rest} className={computedStyles}>
+    return <th ref={ref} {...rest} className={computedStyles}></th>
+  },
+)
 
-        </th>
-    );
-});
-
-TableH.displayName = 'TableH';
+TableH.displayName = 'TableH'
