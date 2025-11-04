@@ -1,5 +1,5 @@
-export { LoginPage } from './LoginPage/LoginPage'
-export { UsersList } from './UsersList/UsersList'
+export { LoginPage } from './LoginPage/ui/LoginPage'
+export { UsersList } from './UsersList/ui/UsersList'
 export { UserInformation} from './MoreInformations/UserInformation/UserInformation'
 export {PostsListPage} from './PostsListPage/PostsListPage'
 export {PaymentsList} from './PaymentsList/PaymentsList'

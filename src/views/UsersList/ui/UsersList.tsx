@@ -1,7 +1,7 @@
 'use client'
 
-import { UsersTable } from './ui/UsersTable/UsersTable'
-import { UsersPageTop } from './ui/UsersPageTop/UsersPageTop'
+import { UsersTable } from './UsersTable/UsersTable'
+import { UsersPageTop } from './UsersPageTop/UsersPageTop'
 import s from './UsersList.module.scss'
 
 export const UsersList = () => {

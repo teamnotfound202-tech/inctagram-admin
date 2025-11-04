@@ -6,6 +6,9 @@ import { Button } from '@/shared/ui'
 import { useForm } from 'react-hook-form'
 import { useId } from 'react'
 import { type LoginFormData, loginSchema } from '@/shared/lib'
+import { useLogInMutation } from '@/views/LoginPage/api/login.generated'
+import { Path } from '@/shared/config'
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
   const {
@@ -17,11 +20,27 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   })
+  const [login] = useLogInMutation()
+  const router = useRouter()
 
   const emailId = useId()
   const passwordId = useId()
 
-  const onSubmit = () => {}
+  const onSubmit = ({email,password}:LoginFormData) => {
+    login({variables:{email,password}})
+      .then((res)=>{
+        if (res.data ){
+          const isLogged = res.data.loginAdmin.logged
+          localStorage.setItem('isLogged',JSON.stringify(isLogged) )
+
+          if(isLogged){
+            router.replace(Path.UsersList)
+          } else {
+            router.replace(Path.SignIn)
+          }
+        }
+      })
+  }
 
   const error = errors.email?.message || errors.password?.message
   const disabled = isSubmitting || !!error

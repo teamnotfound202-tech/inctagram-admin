@@ -1,5 +1,5 @@
 import { Container, FormWrapper } from '@/shared/ui'
-import { LoginForm } from './ui/LoginForm'
+import { LoginForm } from './LoginForm/LoginForm'
 
 export const LoginPage = () => {
   return (
