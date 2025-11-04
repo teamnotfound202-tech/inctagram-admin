@@ -10,14 +10,14 @@ import {MouseEvent, useRef, useState} from 'react'
 import ArrowLeftIcon from '@/shared/assets/icons/arrowLeft.svg'
 import ArrowRightIcon from '@/shared/assets/icons/arrowRight.svg'
 import {clsx} from 'clsx'
-import { PostType } from '@/shared/shared-types'
+import { Post } from '@/shared/graphql/__generated__/graphql'
 
 // Создаем отдельный компонент для содержимого ссылки
-export function LinkContent({post, isTrim}: { post: PostType, isTrim?: string }) {
+export function LinkContent({post, isTrim}: { post: Post, isTrim?: string }) {
     const swiperRef = useRef<SwiperType | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const isPrevDisabled = currentIndex === 0;
-    const isNextDisabled = currentIndex === post.images.length - 1;
+    const isNextDisabled = post.images?.length ? currentIndex === post.images.length - 1 : false;
 
     const imageClassName = clsx(s.postImage, {
         [s.trimPostImage]: isTrim === 'Show less'
@@ -35,6 +35,9 @@ export function LinkContent({post, isTrim}: { post: PostType, isTrim?: string })
         setCurrentIndex(prevState => prevState + 1);
     };
 
+  if (!post.images || post.images?.length === 0) return <div className={s.imgIcon}>Not image</div>
+
+
     return (
         <>
             {post.images.length > 1 ? (
@@ -46,19 +49,22 @@ export function LinkContent({post, isTrim}: { post: PostType, isTrim?: string })
                     }}
                     slidesPerView={1}
                 >
-                    {post.images.map((image, index) => (
+                    {post.images.map((image, index) => {
+
+                      return (
                         <SwiperSlide key={image.url} className={s.postSlide}>
-                            <Image
-                                src={image.url}
-                                className={imageClassName}
-                                alt={'post image'}
-                                width={224}
-                                height={228}
-                                priority={index <= 7}
-                                style={{height: 'auto'}}
-                            />
+                          <Image
+                            src={image.url ?? ''}
+                            className={imageClassName}
+                            alt={'post image'}
+                            width={224}
+                            height={228}
+                            priority={index <= 7}
+                            style={{height: 'auto'}}
+                          />
                         </SwiperSlide>
-                    ))}
+                      )
+                    })}
                     <button
                         className={`${s.navigationButton} ${s.navigationButtonPrev}`}
                         onClick={handlePrevClick}
@@ -76,7 +82,7 @@ export function LinkContent({post, isTrim}: { post: PostType, isTrim?: string })
                 </Swiper>
             ) : (post.images[0] &&
                 <Image
-                    src={post.images[0]?.url}
+                    src={post.images[0]?.url ?? ''}
                     className={imageClassName}
                     alt={'post image'}
                     width={224}

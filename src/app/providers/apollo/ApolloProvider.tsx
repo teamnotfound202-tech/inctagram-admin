@@ -9,10 +9,26 @@ function createClient() {
     credentials: 'include',
   })
 
+  const makeAuthToken = () => {
+    return new ApolloLink((operation, forward) => {
+      if (typeof window === "undefined") {
+        return forward(operation);
+      }
+      const token = sessionStorage.getItem('token')
+      operation.setContext(({ headers = {} }) => ({
+        headers: {
+          ...headers,
+          ...(token ? { Authorization: `Basic ${token}` } : {}),
+        },
+      }))
+      return forward(operation)
+    })
+  }
+
   const link =
     typeof window === "undefined"
       ? ApolloLink.from([new SSRMultipartLink({ stripDefer: true }), httpLink])
-      : httpLink;
+      : ApolloLink.from([makeAuthToken(), httpLink]);
 
   return new ApolloClient({
     cache: new InMemoryCache(),

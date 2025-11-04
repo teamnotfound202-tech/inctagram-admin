@@ -8,11 +8,11 @@ import { Button } from '@/shared/ui'
 import { LinkContent } from '@/shared/ui/PostsList/PostItem/LinkContent/LinkContent'
 import Avatar from '@/shared/ui/Avatar/Avatar'
 import { getTimeDifference } from '@/shared/lib'
-import { PostType } from '@/shared/shared-types'
 import BanIcon from './icons/ban.svg'
+import { Post } from '@/shared/graphql/__generated__/graphql'
 
 type Props = {
-  post: PostType
+  post: Post
 }
 
 const countLetter = 82
@@ -36,7 +36,7 @@ export const PostItem = ({ post }: Props) => {
       setTextDescription(post.description.slice(0, countLetter) + '...')
     }
   }
-
+  const url = post?.postOwner && post?.postOwner?.avatars && post?.postOwner?.avatars[0]?.url
   return (
     <li className={s.postItem}>
       <div className={s.postImageWraper}>
@@ -47,7 +47,7 @@ export const PostItem = ({ post }: Props) => {
 
       <div className={s.userInfoWrapper}>
         <div className={s.userInfo}>
-          <Avatar src={post.postOwner.avatars[0]?.url} alt="Avatar Image" size="small" />
+          <Avatar src={url} alt="Avatar Image" size="small" />
           <p className={s.userName}>
             <span className={s.userName}>{post.postOwner.userName}</span>
           </p>

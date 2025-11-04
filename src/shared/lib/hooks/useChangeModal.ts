@@ -1,3 +1,4 @@
+'use client'
 import {useRef, useEffect} from 'react'
 type PropsChangeModal = {
     handleChangeModal: (value: boolean) => void

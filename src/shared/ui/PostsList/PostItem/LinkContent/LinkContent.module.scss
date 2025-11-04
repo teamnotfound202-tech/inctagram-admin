@@ -75,3 +75,13 @@
     }
   }
 }
+
+.imgIcon {
+  width: 234px;
+  height: 234px;
+  background: $dark-300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $light-300;
+}

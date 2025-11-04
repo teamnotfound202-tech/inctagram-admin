@@ -1,7 +1,7 @@
 'use client'
 import s from './LoginForm.module.scss'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Input } from '@/shared/ui'
+import { AlertToast, Input } from '@/shared/ui'
 import { Button } from '@/shared/ui'
 import { useForm } from 'react-hook-form'
 import { useId } from 'react'
@@ -9,6 +9,7 @@ import { type LoginFormData, loginSchema } from '@/shared/lib'
 import { useLogInMutation } from '@/views/LoginPage/api/login.generated'
 import { Path } from '@/shared/config'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export const LoginForm = () => {
   const {
@@ -20,30 +21,36 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   })
-  const [login] = useLogInMutation()
+  const [login, {loading}] = useLogInMutation()
   const router = useRouter()
 
   const emailId = useId()
   const passwordId = useId()
 
-  const onSubmit = ({email,password}:LoginFormData) => {
+  const onSubmit = ({email,password}: LoginFormData) => {
     login({variables:{email,password}})
       .then((res)=>{
-        if (res.data ){
+        if (res.data){
           const isLogged = res.data.loginAdmin.logged
-          localStorage.setItem('isLogged',JSON.stringify(isLogged) )
+          sessionStorage.setItem('isLogged', JSON.stringify(isLogged))
 
           if(isLogged){
+            const logged = `${email}:${password}`
+            const token = btoa(logged)
+            sessionStorage.setItem('token', token)
             router.replace(Path.UsersList)
           } else {
             router.replace(Path.SignIn)
+            toast.custom(() => (
+              <AlertToast variant="error" title='Ошибка доступа' description='У вас нет прав доступа на эту страницу' />
+            ))
           }
         }
       })
   }
 
   const error = errors.email?.message || errors.password?.message
-  const disabled = isSubmitting || !!error
+  const disabled = isSubmitting || !!error || loading
 
   const handleEmailBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
     const nativeOnBlur = register('email').onBlur
@@ -53,6 +60,7 @@ export const LoginForm = () => {
     await trigger('email')
   }
 
+  console.log(errors)
   return (
     <div className={s.containerForm}>
       <h1 className={s.registrationFormTitle}>Sign In</h1>
@@ -65,6 +73,7 @@ export const LoginForm = () => {
           error={errors.email?.message}
           {...register('email')}
           onBlur={handleEmailBlur}
+          autoComplete={'on'}
         />
 
         <Input

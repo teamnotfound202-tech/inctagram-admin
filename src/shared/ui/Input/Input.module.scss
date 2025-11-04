@@ -4,6 +4,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  color: $light-100;
   & div {
     outline: none !important;
     --text-field-border-width: none;

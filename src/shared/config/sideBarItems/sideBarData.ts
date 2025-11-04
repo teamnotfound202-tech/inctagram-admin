@@ -1,4 +1,4 @@
-import { Path } from '../routes/routes'
+import { Path } from '@/shared/config'
 
 export type Text = 'Users list' | 'Statistics' | 'Payments list' | 'Posts list'
 
