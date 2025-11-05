@@ -13,7 +13,7 @@ export default function Home() {
     if (!isLogged) {
       router.replace(Path.SignIn)
     } else {
-      router.replace(Path.PostsList)
+      router.replace(Path.UsersList)
     }
   }, [router])
 

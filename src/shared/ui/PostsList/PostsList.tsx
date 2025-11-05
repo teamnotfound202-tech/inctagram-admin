@@ -21,11 +21,11 @@ export const PostsList = () => {
   const isNextPage = data && currentCount < data.getPosts.pagesCount
 
   const handleNextPosts = useCallback(() => {
-    if (data){
+    if (data) {
       const id = data?.getPosts.items[data.getPosts.items.length - 1].id
       if (isNextPage && id) {
         fetchMore({
-          variables: { endCursorPostId: id, pageSize: pageSize },
+          variables: { endCursorPostId: id, pageSize: pageSize + 1 },
         })
         setCurrentCount((perCount)=> perCount + 1)
       }
@@ -34,8 +34,8 @@ export const PostsList = () => {
 
 
   useEffect(() => {
-    const observer = new IntersectionObserver(el => {
-      if(el[0] && el[0].isIntersecting) {
+    const observer = new IntersectionObserver((arrElements) => {
+      if(arrElements[0] && arrElements[0].isIntersecting) {
         handleNextPosts()
       }
     },

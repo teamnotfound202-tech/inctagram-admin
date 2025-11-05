@@ -23,7 +23,7 @@ export function AuthGuard({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    router.replace(isLoggedIn ? Path.UsersList : Path.SignIn)
+    if (!isLoggedIn) return router.replace(Path.SignIn)
   }, [isLoggedIn, router])
 
   if (!isLoggedIn) return
