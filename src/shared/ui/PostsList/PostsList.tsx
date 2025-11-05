@@ -14,7 +14,7 @@ export const PostsList = () => {
       endCursorPostId: 0,
       searchTerm: '',
       pageSize: pageSize,
-      sortBy: 'createdA',
+      sortBy: 'createdAt',
     }},
   )
   const [currentCount, setCurrentCount] = useState(1)
