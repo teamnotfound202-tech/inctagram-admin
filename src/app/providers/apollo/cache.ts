@@ -5,7 +5,11 @@ export const cache = new InMemoryCache({
     Query: {
       fields: {
         getPosts: {
-          keyArgs: ['searchTerm', 'sortBy', 'sortDirection'],
+          keyArgs: [
+            // 'searchTerm',
+            // 'sortBy',
+            // 'sortDirection'
+          ],
           merge(existing, incoming, { args }) {
 
             if (!existing || !args?.endCursorPostId || args.endCursorPostId === 0 ) {

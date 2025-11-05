@@ -18,11 +18,24 @@ const config: CodegenConfig = {
       },
       plugins: [
         'typescript-operations',
-        'typescript-react-apollo'
+        'typescript-react-apollo',
+        {
+          add: {
+            content: [
+              "import { ISOStringFormat } from 'date-fns';",
+            ],
+          },
+        },
       ],
       config: {
-        withHooks: true,
-        skipTypename: false
+        apolloReactHooksImportFrom: '@apollo/client/react',
+        withHooks: true,                 // хук keep
+        withMutationFn: false,           // убрать ...MutationFn
+        withResultType: false,           // убрать ...Result / ...HookResult
+        withMutationOptionsType: false,  // убрать ...MutationOptions
+        scalars: {
+          DateTime: 'ISOStringFormat',
+        },
       }
     }
   }

@@ -1,4 +1,4 @@
-import { ISOStringFormat } from 'date-fns'
+import { ISOStringFormat } from 'date-fns';
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;

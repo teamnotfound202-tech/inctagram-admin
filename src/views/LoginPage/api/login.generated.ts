@@ -1,8 +1,7 @@
-'use client'
 import * as Types from '../../../shared/graphql/__generated__/graphql';
 
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client/react';
+import * as ApolloReactHooks from '@apollo/client/react';
 const defaultOptions = {} as const;
 export type LogInMutationVariables = Types.Exact<{
   email: Types.Scalars['String']['input'];
@@ -20,7 +19,6 @@ export const LogInDocument = gql`
   }
 }
     `;
-export type LogInMutationFn = Apollo.MutationFunction<LogInMutation, LogInMutationVariables>;
 
 /**
  * __useLogInMutation__
@@ -40,10 +38,8 @@ export type LogInMutationFn = Apollo.MutationFunction<LogInMutation, LogInMutati
  *   },
  * });
  */
-export function useLogInMutation(baseOptions?: Apollo.MutationHookOptions<LogInMutation, LogInMutationVariables>) {
+export function useLogInMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LogInMutation, LogInMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument, options);
+        return ApolloReactHooks.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument, options);
       }
 export type LogInMutationHookResult = ReturnType<typeof useLogInMutation>;
-export type LogInMutationResult = Apollo.MutationResult<LogInMutation>;
-export type LogInMutationOptions = Apollo.BaseMutationOptions<LogInMutation, LogInMutationVariables>;

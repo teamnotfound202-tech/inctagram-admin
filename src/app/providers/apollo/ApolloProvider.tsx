@@ -37,6 +37,7 @@ function createClient() {
   })
 }
 
+
 export default function ApolloProvider({ children }: { children: ReactNode }) {
   return <ApolloNextAppProvider makeClient={createClient}>
     {children}

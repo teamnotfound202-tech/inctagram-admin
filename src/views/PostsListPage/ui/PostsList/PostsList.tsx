@@ -1,6 +1,6 @@
 'use client'
 import s from './PostsList.module.scss'
-import { PostItem } from '@/shared/ui/PostsList/PostItem/PostItem'
+import { PostItem } from '@/views/PostsListPage/ui/PostsList/PostItem/PostItem'
 import { useGetPostsQuery } from '@/views/PostsListPage/api/getPosts.generated'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Spinner from '@/shared/ui/Spinner/Spinner'
@@ -8,13 +8,11 @@ import Spinner from '@/shared/ui/Spinner/Spinner'
 export const pageSize = 10
 
 
-export const PostsList = () => {
+export const PostsList = ({value}: {value: string}) => {
   const listsRef = useRef(null)
   const {data, fetchMore} = useGetPostsQuery({variables: {
       endCursorPostId: 0,
-      searchTerm: '',
-      pageSize: pageSize,
-      sortBy: 'createdAt',
+      searchTerm: value,
     }},
   )
   const [currentCount, setCurrentCount] = useState(1)
@@ -25,12 +23,12 @@ export const PostsList = () => {
       const id = data?.getPosts.items[data.getPosts.items.length - 1].id
       if (isNextPage && id) {
         fetchMore({
-          variables: { endCursorPostId: id, pageSize: pageSize + 1 },
+          variables: { endCursorPostId: id, searchTerm: value },
         })
         setCurrentCount((perCount)=> perCount + 1)
       }
     }
-  }, [data, fetchMore, isNextPage])
+  }, [data, fetchMore, isNextPage, value])
 
 
   useEffect(() => {
