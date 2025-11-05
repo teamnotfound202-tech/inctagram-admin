@@ -3,13 +3,14 @@ import s from './PostsList.module.scss'
 import { PostItem } from '@/shared/ui/PostsList/PostItem/PostItem'
 import { useGetPostsQuery } from '@/views/PostsListPage/api/getPosts.generated'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Spinner from '@/shared/ui/Spinner/Spinner'
 
 export const pageSize = 10
 
 
 export const PostsList = () => {
   const listsRef = useRef(null)
-  const {data, fetchMore, loading} = useGetPostsQuery({variables: {
+  const {data, fetchMore} = useGetPostsQuery({variables: {
       endCursorPostId: 0,
       searchTerm: '',
       pageSize: pageSize,
@@ -64,8 +65,7 @@ export const PostsList = () => {
         ))}
       </ul>
       {!data?.getPosts.items || (data?.getPosts.items.length === 0 && <div>No posts</div>)}
-      {loading && <div className={s.loader}>Load more posts</div>}
-      {isNextPage && <div ref={listsRef}><p>get more posts ...</p></div>}
+      {isNextPage && <div ref={listsRef}><Spinner type="secondary" size={16} label={'Loading...'} fullWidth center /></div>}
     </>
   )
 }
