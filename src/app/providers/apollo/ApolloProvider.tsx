@@ -1,7 +1,8 @@
 "use client";
 import { HttpLink, ApolloLink } from '@apollo/client'
-import { ApolloNextAppProvider, SSRMultipartLink, ApolloClient, InMemoryCache  } from '@apollo/client-integration-nextjs'
+import { ApolloNextAppProvider, SSRMultipartLink, ApolloClient } from '@apollo/client-integration-nextjs'
 import { ReactNode } from 'react'
+import { cache } from '@/app/providers/apollo/cache'
 
 function createClient() {
   const httpLink = new HttpLink({
@@ -31,7 +32,7 @@ function createClient() {
       : ApolloLink.from([makeAuthToken(), httpLink]);
 
   return new ApolloClient({
-    cache: new InMemoryCache(),
+    cache,
     link,
   })
 }
