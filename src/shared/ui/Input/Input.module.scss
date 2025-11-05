@@ -70,6 +70,10 @@
   outline: none;
 
   transition: 0.25s;
+  &::selection {
+    background-color: $dark-100 !important;
+  }
+
   & input {
     background-color: transparent !important;
     text-indent: 0;
@@ -77,7 +81,7 @@
     padding: 4px 0 !important;
     border: transparent !important;
     outline: none !important;
-
+    user-select: text;
     &:hover {
       border-color: $light-900;
     }
@@ -92,6 +96,10 @@
     }
     &:focus-within {
       border-color: $light-100 !important;
+    }
+
+    &:autofill {
+      -webkit-text-fill-color: $light-900;
     }
   }
 
