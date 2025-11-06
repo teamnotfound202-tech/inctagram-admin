@@ -2,19 +2,35 @@
 import s from './PostsList.module.scss'
 import { PostItem } from '@/views/PostsListPage/ui/PostsList/PostItem/PostItem'
 import { useGetPostsQuery } from '@/views/PostsListPage/api/getPosts.generated'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import Spinner from '@/shared/ui/Spinner/Spinner'
+import { usePostAddedSubscription } from '@/views/PostsListPage/api/postAdded.generated'
+import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll'
 
-export const pageSize = 10
-
-
-export const PostsList = ({value}: {value: string}) => {
-  const listsRef = useRef(null)
-  const {data, fetchMore} = useGetPostsQuery({variables: {
+export const PostsList = ({ value }: { value: string }) => {
+  const { data, fetchMore, refetch } = useGetPostsQuery({
+    variables: {
       endCursorPostId: 0,
       searchTerm: value,
-    }},
-  )
+    },
+  })
+
+  usePostAddedSubscription({
+    // через client полчучаем доступ к кешу через data данные полученные по подписке через ws
+    onData: ({ data, client }) => {
+      const newPost = data?.data?.postAdded
+      if (!newPost) return
+      // Добавление нового элемента в кэш
+      client.cache.modify({
+        fields: {
+          getPosts(existing) {
+            return { ...existing, items: [newPost, ...(existing.items ?? [])] }
+          },
+        },
+      })
+    },
+  })
+
   const [currentCount, setCurrentCount] = useState(1)
   const isNextPage = data && currentCount < data.getPosts.pagesCount
 
@@ -25,45 +41,28 @@ export const PostsList = ({value}: {value: string}) => {
         fetchMore({
           variables: { endCursorPostId: id, searchTerm: value },
         })
-        setCurrentCount((perCount)=> perCount + 1)
+        setCurrentCount((perCount) => perCount + 1)
       }
     }
   }, [data, fetchMore, isNextPage, value])
 
+  const listsRef = useInfiniteScroll({ func: handleNextPosts })
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((arrElements) => {
-      if(arrElements[0] && arrElements[0].isIntersecting) {
-        handleNextPosts()
-      }
-    },
-    {
-      root: null, // Отслеживание относительно окна браузера (viewport). null = весь экран
-      rootMargin: '100px', // Начинать загрузку до появления элемента
-      threshold: 0.1
-    })
-
-    const currentObserverRef = listsRef.current
-    if (currentObserverRef) {
-      observer.observe(currentObserverRef)
-    }
-
-    return () => {
-      if (currentObserverRef) {
-        observer.unobserve(currentObserverRef)
-      }
-    }
-  }, [handleNextPosts])
+  const refetchOnPosts = () => refetch()
 
   return (
     <>
       <ul className={s.userPostsList}>
         {data?.getPosts.items.map((post) => (
-          <PostItem key={post.id} post={post} />
+          <PostItem key={post.id} post={post} refetchOnPostsAction={refetchOnPosts}/>
         ))}
       </ul>
       {!data?.getPosts.items || (data?.getPosts.items.length === 0 && <div>No posts</div>)}
-      {isNextPage && <div ref={listsRef}><Spinner type="secondary" size={16} label={'Loading...'} fullWidth center /></div>}
+      {isNextPage && (
+        <div ref={listsRef}>
+          <Spinner type="secondary" size={16} label={'Loading...'} fullWidth center />
+        </div>
+      )}
     </>
   )
 }

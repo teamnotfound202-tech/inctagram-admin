@@ -12,33 +12,33 @@ import { AgreementsType, BanUserType } from '@/shared/shared-types'
 
 type Props = {
     // userId: number
-    handleChangeModal: (value: boolean) => void
+    handleChangeModalAction: (value: boolean) => void
     isOpen: boolean
-    handleOpenAgreementModal: (value: boolean, type: AgreementsType) => void
+    handleOpenAgreementModalAction: (value: boolean, type: AgreementsType) => void
     userBan: BanUserType|null
 }
 
 export const ModalSettingUser = ({
      // userId,
-     handleChangeModal,
+     handleChangeModalAction,
      isOpen,
-     handleOpenAgreementModal,
+     handleOpenAgreementModalAction,
      userBan
 }: Props) => {
-    const wrapperRef = useChangeModal({isOpen, handleChangeModal})
+    const wrapperRef = useChangeModal({isOpen, handleChangeModalAction: handleChangeModalAction})
     return (
         <div className={s.modalSetting} ref={wrapperRef}>
-            <button className={s.modalSettingBtn} onClick={() => handleOpenAgreementModal(true, 'delete')}>
+            <button className={s.modalSettingBtn} onClick={() => handleOpenAgreementModalAction(true, 'delete')}>
                 <DeleteIcon/>
                 Delete User
             </button>
             {userBan ? (
-                <button className={s.modalSettingBtn} onClick={() => handleOpenAgreementModal(true, 'unban')}>
+                <button className={s.modalSettingBtn} onClick={() => handleOpenAgreementModalAction(true, 'unban')}>
                     <UnBanIcon/>
                     Un-ban User
                 </button>
                 ) : (
-                <button className={s.modalSettingBtn} onClick={() => handleOpenAgreementModal(true, 'ban')}>
+                <button className={s.modalSettingBtn} onClick={() => handleOpenAgreementModalAction(true, 'ban')}>
                     <BanIcon/>
                     Ban in the system
                 </button>

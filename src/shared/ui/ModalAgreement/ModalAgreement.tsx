@@ -1,6 +1,5 @@
-import {Modal} from '@/shared/ui'
+import { Modal, SelectBox } from '@/shared/ui'
 import {Button} from '@/shared/ui'
-import {SelectBox} from '@/shared/ui'
 import s from './ModalAgreement.module.scss'
 import {AgreementsType} from '@/shared/shared-types'
 
@@ -10,18 +9,20 @@ type Props = {
     userName: string
     handleCloseAgreementModal: (value: boolean) => void
     onClick: () => void
+    onValueChange:(value: string) => void
 }
 
 export const ModalAgreement = ({
    type,
    userName,
    handleCloseAgreementModal,
-   onClick
+   onClick,
+   onValueChange
 }: Props) => {
 
     const changeTypeTitle = (type: AgreementsType) => {
-        let title = ''
-        let text = ''
+        let title
+        let text
         switch (type) {
             case 'ban':
                 title = 'Ban user'
@@ -60,6 +61,7 @@ export const ModalAgreement = ({
                         defaultValue={''}
                         fullWidth={true}
                         placeholder={'Reason for ban'}
+                        onValueChange={onValueChange}
                     />
                 )}
                 <div className={s.btnWrapperAgreementModal}>

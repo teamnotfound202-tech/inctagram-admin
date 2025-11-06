@@ -1,11 +1,11 @@
 'use client'
 import {useRef, useEffect} from 'react'
 type PropsChangeModal = {
-    handleChangeModal: (value: boolean) => void
+    handleChangeModalAction: (value: boolean) => void
     isOpen: boolean
 }
 
-export const useChangeModal = ({handleChangeModal, isOpen}: PropsChangeModal) => {
+export const useChangeModal = ({handleChangeModalAction, isOpen}: PropsChangeModal) => {
     const wrapperRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export const useChangeModal = ({handleChangeModal, isOpen}: PropsChangeModal) =>
         const onDocPointer = (e: MouseEvent | TouchEvent) => {
             const root = wrapperRef.current
             if (root && !root.contains(e.target as Node)) {
-                handleChangeModal(false)
+              handleChangeModalAction(false)
             }
         }
         const prevOverflow = document.body.style.overflow
@@ -25,6 +25,6 @@ export const useChangeModal = ({handleChangeModal, isOpen}: PropsChangeModal) =>
             document.removeEventListener('mousedown', onDocPointer, true)
             document.removeEventListener('touchstart', onDocPointer, true)
         }
-    }, [isOpen, wrapperRef, handleChangeModal])
+    }, [isOpen, wrapperRef, handleChangeModalAction])
     return wrapperRef
 }

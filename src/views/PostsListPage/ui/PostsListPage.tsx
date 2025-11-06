@@ -33,7 +33,7 @@ export const PostsListPage = () => {
       id={'inputSearch'}
       className={s.postsListPageSearchInput}
       type="search"
-      placeholder={'Search'}
+      placeholder={'Search in username'}
       onChange={(e) =>  setValue(e.target.value)}
       value={value}
     />

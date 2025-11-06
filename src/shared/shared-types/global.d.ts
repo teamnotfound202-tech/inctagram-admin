@@ -1,5 +1,6 @@
 import { ISOStringFormat } from 'date-fns'
 export type AgreementsType = 'ban' | 'delete' | 'unban'
+export type ReasonForBlocking = 'Bad behavior' | 'Advertising placement' |'Another reason'
 
 export type BanUserType = {
   reason: string

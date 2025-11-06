@@ -3,23 +3,35 @@
 import s from './PostItem.module.scss'
 import 'swiper/css'
 import { useState } from 'react'
-import Link from 'next/link'
-import { Button } from '@/shared/ui'
+import { Button, ModalAgreement } from '@/shared/ui'
 import { LinkContent } from '@/views/PostsListPage/ui/PostsList/PostItem/LinkContent/LinkContent'
 import Avatar from '@/shared/ui/Avatar/Avatar'
 import { getTimeDifference } from '@/shared/lib'
 import BanIcon from './icons/ban.svg'
+import UnBanIcon from './icons/unban.svg'
 import { Post } from '@/shared/graphql/__generated__/graphql'
+import { useHandleModals } from '@/shared/lib/hooks/useHandleModals'
+import { useBanUserMutation } from '@/views/PostsListPage/api/banUser.generated'
+import { useUnbanUserMutation } from '@/views/PostsListPage/api/unbanUser.generated'
 
 type Props = {
   post: Post
+  refetchOnPostsAction: () => void
 }
 
 const countLetter = 82
 const maxLetters = 210
 
-export const PostItem = ({ post }: Props) => {
+export const PostItem = ({ post, refetchOnPostsAction}: Props) => {
   const [text, setText] = useState('Show more')
+  const [banValue, setBanValue] = useState('')
+  const [banUserFunc] = useBanUserMutation()
+  const [unbanUserFunc] = useUnbanUserMutation()
+  const {
+    handleOpenAgreementModal,
+    isOpenAgreementModal,
+    handleCloseAgreementModal,
+  } = useHandleModals()
 
   const postDescriptionLength =
     post && post.description && post.description.length > countLetter
@@ -36,49 +48,84 @@ export const PostItem = ({ post }: Props) => {
       setTextDescription(post.description.slice(0, countLetter) + '...')
     }
   }
+
   const url = post?.postOwner && post?.postOwner?.avatars && post?.postOwner?.avatars[0]?.url
+
+  const changeBanCause = (value: string) => {
+    setBanValue(value)
+  }
+
+  const handleBanUser = async () => {
+    await banUserFunc({variables: {userId: post.ownerId, banReason: banValue}})
+    handleCloseAgreementModal(false)
+    refetchOnPostsAction()
+  }
+
+  const handleUnBanUser = async () => {
+    await unbanUserFunc({variables: {userId: post.ownerId}})
+    handleCloseAgreementModal(false)
+    refetchOnPostsAction()
+  }
+
   return (
-    <li className={s.postItem}>
-      <div className={s.postImageWraper}>
-        <Link href={`/profile/${post.ownerId}/post/${post.id}`}>
-          <LinkContent post={post} isTrim={text} />
-        </Link>
-      </div>
-
-      <div className={s.userInfoWrapper}>
-        <div className={s.userInfo}>
-          <Avatar src={url} alt="Avatar Image" size="small" />
-          <p className={s.userName}>
-            <span className={s.userName}>{post.postOwner.userName}</span>
-          </p>
+    <>
+      <li className={s.postItem}>
+        <div className={s.postImageWraper}>
+          <div>
+            <LinkContent post={post} isTrim={text} />
+          </div>
         </div>
-        <button className={s.userInfoBtn} onClick={() => {}}>
-          <BanIcon/>
-        </button>
-      </div>
 
-      <span className={s.time}>{getTimeDifference(post.createdAt)}</span>
+        <div className={s.userInfoWrapper}>
+          <div className={s.userInfo}>
+            <Avatar src={url} alt="Avatar Image" size="small" />
+            <p className={s.userName}>
+              <span className={s.userName}>{post.postOwner.userName}</span>
+            </p>
+          </div>
+          {post.userBan ? (
+            <button className={s.userInfoBtn} onClick={handleUnBanUser}>
+              <UnBanIcon/>
+            </button>
+          ) : (
+            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'ban')}>
+              <BanIcon />
+            </button>
+          )}
+        </div>
 
-      <p className={s.description}>
-        {textDescription}
-        {textDescription.length > countLetter && (
-          <Button
-            variant={'text'}
-            className={s.showMoreButton}
-            onClick={() => {
-              if (text === 'Show more') {
-                handleChangeHeightText(maxLetters)
-                setText('Show less')
-              } else {
-                handleChangeHeightText()
-                setText('Show more')
-              }
-            }}
-          >
-            {text}
-          </Button>
-        )}
-      </p>
-    </li>
+        <span className={s.time}>{getTimeDifference(post.createdAt)}</span>
+
+        <p className={s.description}>
+          {textDescription}
+          {textDescription.length > countLetter && (
+            <Button
+              variant={'text'}
+              className={s.showMoreButton}
+              onClick={() => {
+                if (text === 'Show more') {
+                  handleChangeHeightText(maxLetters)
+                  setText('Show less')
+                } else {
+                  handleChangeHeightText()
+                  setText('Show more')
+                }
+              }}
+            >
+              {text}
+            </Button>
+          )}
+        </p>
+      </li>
+      {isOpenAgreementModal && (
+        <ModalAgreement
+          type={post.userBan ? 'unban' : 'ban'}
+          userName={post.postOwner.userName}
+          handleCloseAgreementModal={handleCloseAgreementModal}
+          onValueChange={changeBanCause}
+          onClick={handleBanUser}
+        />
+      )}
+    </>
   )
 }

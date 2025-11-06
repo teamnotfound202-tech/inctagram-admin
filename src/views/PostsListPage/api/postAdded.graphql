@@ -1,0 +1,12 @@
+subscription PostAdded {
+    postAdded {
+        id
+        ownerId
+        description
+        createdAt
+        updatedAt
+        postOwner { id userName }
+        userBan { createdAt reason }
+        images { url }
+    }
+}

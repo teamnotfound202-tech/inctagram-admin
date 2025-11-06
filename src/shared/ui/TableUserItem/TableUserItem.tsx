@@ -1,15 +1,12 @@
 'use client'
 
-import { TableRow } from '@/shared/ui'
-import { TableDataCell } from '@/shared/ui'
+import { TableRow, TableDataCell, ModalAgreement, ModalSettingUser} from '@/shared/ui'
 import s from './TableUserItem.module.scss'
 import BanIcon from './icons/ban.svg'
 import BtnIcon from './icons/btn.svg'
 import Link from 'next/link'
-import {ModalSettingUser} from "@/shared/ui";
-import {useState} from 'react'
-import {ModalAgreement} from '@/shared/ui';
 import type { AgreementsType, UserType } from '@/shared/shared-types'
+import { useHandleModals } from '@/shared/lib/hooks/useHandleModals'
 
 type Props = {
     profileLink: string
@@ -17,23 +14,14 @@ type Props = {
 }
 
 export const TableUserItem = ({profileLink, user}: Props) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpenAgreementModal, setIsOpenAgreementModal] = useState(false)
-    const [typeModalAgreement, setTypeModalAgreement] = useState<AgreementsType>('ban')
-
-    const handleChangeModal = (value: boolean) => {
-        setIsOpen(value)
-    }
-
-    const handleOpenAgreementModal = (value: boolean, type: AgreementsType) => {
-        setIsOpenAgreementModal(value)
-        setTypeModalAgreement(type)
-        setIsOpen(!value)
-    }
-
-    const handleCloseAgreementModal = (value: boolean) => {
-        setIsOpenAgreementModal(value)
-    }
+    const {
+      handleChangeModal,
+      isOpen,
+      handleOpenAgreementModal,
+      isOpenAgreementModal,
+      typeModalAgreement,
+      handleCloseAgreementModal,
+    } = useHandleModals()
 
     const handleBanUser = () => {
         console.log('handleBanUser')
@@ -86,9 +74,9 @@ export const TableUserItem = ({profileLink, user}: Props) => {
                 </button>
                 {isOpen && (
                     <ModalSettingUser
-                        handleChangeModal={handleChangeModal}
+                        handleChangeModalAction={handleChangeModal}
                         isOpen={isOpen}
-                        handleOpenAgreementModal={handleOpenAgreementModal}
+                        handleOpenAgreementModalAction={handleOpenAgreementModal}
                         userBan={user.userBan}
                     />
                 )}
