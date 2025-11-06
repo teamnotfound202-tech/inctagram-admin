@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Button, ModalAgreement } from '@/shared/ui'
 import { LinkContent } from '@/views/PostsListPage/ui/PostsList/PostItem/LinkContent/LinkContent'
 import Avatar from '@/shared/ui/Avatar/Avatar'
-import { getTimeDifference } from '@/shared/lib'
+import { changeBanUserInCache, getTimeDifference } from '@/shared/lib'
 import BanIcon from './icons/ban.svg'
 import UnBanIcon from './icons/unban.svg'
 import { Post } from '@/shared/graphql/__generated__/graphql'
@@ -16,17 +16,24 @@ import { useUnbanUserMutation } from '@/views/PostsListPage/api/unbanUser.genera
 
 type Props = {
   post: Post
-  refetchOnPostsAction: () => void
 }
 
 const countLetter = 82
 const maxLetters = 210
 
-export const PostItem = ({ post, refetchOnPostsAction}: Props) => {
+export const PostItem = ({ post }: Props) => {
   const [text, setText] = useState('Show more')
   const [banValue, setBanValue] = useState('')
-  const [banUserFunc] = useBanUserMutation()
-  const [unbanUserFunc] = useUnbanUserMutation()
+  const [banUserFunc] = useBanUserMutation({
+    update(cache, {data}) {
+      changeBanUserInCache(cache, post.ownerId, data?.banUser)
+    }
+  })
+  const [unbanUserFunc] = useUnbanUserMutation({
+    update(cache, { data }) {
+      changeBanUserInCache(cache, post.ownerId, data?.unbanUser)
+    }
+  })
   const {
     handleOpenAgreementModal,
     isOpenAgreementModal,
@@ -58,13 +65,11 @@ export const PostItem = ({ post, refetchOnPostsAction}: Props) => {
   const handleBanUser = async () => {
     await banUserFunc({variables: {userId: post.ownerId, banReason: banValue}})
     handleCloseAgreementModal(false)
-    refetchOnPostsAction()
   }
 
   const handleUnBanUser = async () => {
     await unbanUserFunc({variables: {userId: post.ownerId}})
     handleCloseAgreementModal(false)
-    refetchOnPostsAction()
   }
 
   return (

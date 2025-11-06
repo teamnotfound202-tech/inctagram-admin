@@ -7,10 +7,20 @@ import Spinner from '@/shared/ui/Spinner/Spinner'
 import { usePostAddedSubscription } from '@/views/PostsListPage/api/postAdded.generated'
 import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll'
 
-export const PostsList = ({ value }: { value: string }) => {
-  const { data, fetchMore, refetch } = useGetPostsQuery({
+type Props = {
+  value: string
+  cursorId: number
+  changeCursorIdAction: (value: number) => void
+}
+
+export const PostsList = ({
+  value,
+  cursorId,
+  changeCursorIdAction
+}: Props) => {
+  const { data, fetchMore} = useGetPostsQuery({
     variables: {
-      endCursorPostId: 0,
+      endCursorPostId: cursorId,
       searchTerm: value,
     },
   })
@@ -41,20 +51,19 @@ export const PostsList = ({ value }: { value: string }) => {
         fetchMore({
           variables: { endCursorPostId: id, searchTerm: value },
         })
+        changeCursorIdAction(id)
         setCurrentCount((perCount) => perCount + 1)
       }
     }
-  }, [data, fetchMore, isNextPage, value])
+  }, [data, fetchMore, isNextPage, value, changeCursorIdAction])
 
   const listsRef = useInfiniteScroll({ func: handleNextPosts })
-
-  const refetchOnPosts = () => refetch()
 
   return (
     <>
       <ul className={s.userPostsList}>
         {data?.getPosts.items.map((post) => (
-          <PostItem key={post.id} post={post} refetchOnPostsAction={refetchOnPosts}/>
+          <PostItem key={post.id} post={post} />
         ))}
       </ul>
       {!data?.getPosts.items || (data?.getPosts.items.length === 0 && <div>No posts</div>)}

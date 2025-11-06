@@ -8,8 +8,9 @@ import { useGetPostsQuery } from '@/views/PostsListPage/api/getPosts.generated'
 export const PostsListPage = () => {
   const [value, setValue] = useState('')
   const [valueDebounced, setValueDebounced] = useState(value)
+  const [cursorId, setCursorId] = useState(0)
   const {refetch} = useGetPostsQuery({variables: {
-      endCursorPostId: 0,
+      endCursorPostId: cursorId,
       searchTerm: value,
     }},
   )
@@ -27,6 +28,8 @@ export const PostsListPage = () => {
     refetch({searchTerm: valueDebounced, endCursorPostId: 0})
   }, [valueDebounced, refetch])
 
+  const changeCursorId = (value: number) => setCursorId(value)
+
   return (
     <div className={s.postsListPage}>
       <Input
@@ -37,7 +40,7 @@ export const PostsListPage = () => {
       onChange={(e) =>  setValue(e.target.value)}
       value={value}
     />
-      <PostsList value={value}/>
+      <PostsList value={value}  cursorId={cursorId} changeCursorIdAction={changeCursorId}/>
     </div>
   )
 }
