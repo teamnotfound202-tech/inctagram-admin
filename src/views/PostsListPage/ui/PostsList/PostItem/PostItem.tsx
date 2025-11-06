@@ -24,12 +24,12 @@ const maxLetters = 210
 export const PostItem = ({ post }: Props) => {
   const [text, setText] = useState('Show more')
   const [banValue, setBanValue] = useState('')
-  const [banUserFunc] = useBanUserMutation({
+  const [banUserFunc, {loading: loadingBun}] = useBanUserMutation({
     update(cache, {data}) {
       changeBanUserInCache(cache, post.ownerId, data?.banUser)
     }
   })
-  const [unbanUserFunc] = useUnbanUserMutation({
+  const [unbanUserFunc, {loading: loadingUnBun}] = useUnbanUserMutation({
     update(cache, { data }) {
       changeBanUserInCache(cache, post.ownerId, data?.unbanUser)
     }
@@ -89,11 +89,11 @@ export const PostItem = ({ post }: Props) => {
             </p>
           </div>
           {post.userBan ? (
-            <button className={s.userInfoBtn} onClick={handleUnBanUser}>
+            <button className={s.userInfoBtn} onClick={handleUnBanUser} disabled={loadingBun|| loadingUnBun}>
               <UnBanIcon/>
             </button>
           ) : (
-            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'ban')}>
+            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'ban')} disabled={loadingBun|| loadingUnBun}>
               <BanIcon />
             </button>
           )}

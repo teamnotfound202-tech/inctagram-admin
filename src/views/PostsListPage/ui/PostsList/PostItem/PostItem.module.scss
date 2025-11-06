@@ -56,3 +56,7 @@
   height: 24px;
   cursor: pointer;
 }
+
+.userInfoBtn:disabled {
+  cursor: not-allowed;
+}
