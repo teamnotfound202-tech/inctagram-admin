@@ -129,6 +129,7 @@ export const PostItem = ({ post }: Props) => {
           handleCloseAgreementModal={handleCloseAgreementModal}
           onValueChange={changeBanCause}
           onClick={handleBanUser}
+          disabled={loadingBun}
         />
       )}
     </>

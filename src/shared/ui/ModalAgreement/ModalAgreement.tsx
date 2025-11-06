@@ -10,6 +10,7 @@ type Props = {
     handleCloseAgreementModal: (value: boolean) => void
     onClick: () => void
     onValueChange:(value: string) => void
+    disabled?: boolean
 }
 
 export const ModalAgreement = ({
@@ -17,7 +18,8 @@ export const ModalAgreement = ({
    userName,
    handleCloseAgreementModal,
    onClick,
-   onValueChange
+   onValueChange,
+   disabled
 }: Props) => {
 
     const changeTypeTitle = (type: AgreementsType) => {
@@ -65,8 +67,8 @@ export const ModalAgreement = ({
                     />
                 )}
                 <div className={s.btnWrapperAgreementModal}>
-                    <Button className={s.btnAgreementModal} variant={'primary'} onClick={() => handleCloseAgreementModal(false)}>No</Button>
-                    <Button className={s.btnAgreementModal} variant={'outline'} onClick={onClick}>Yes</Button>
+                    <Button className={s.btnAgreementModal} variant={'primary'} onClick={() => handleCloseAgreementModal(false)} disabled={disabled}>No</Button>
+                    <Button className={s.btnAgreementModal} variant={'outline'} onClick={onClick} disabled={disabled}>Yes</Button>
                 </div>
             </div>
         </Modal>
