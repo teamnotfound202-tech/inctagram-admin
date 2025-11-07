@@ -58,7 +58,7 @@ export const PostsList = ({
   }, [data, fetchMore, isNextPage, value, changeCursorIdAction, cursorId])
 
   const listsRef = useInfiniteScroll({ func: handleNextPosts })
-  console.log(cursorId)
+
   return (
     <>
       <ul className={s.userPostsList}>
