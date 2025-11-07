@@ -3,7 +3,7 @@
 import s from './PostItem.module.scss'
 import 'swiper/css'
 import { useState } from 'react'
-import { Button, ModalAgreement } from '@/shared/ui'
+import { AlertToast, Button, ModalAgreement } from '@/shared/ui'
 import { LinkContent } from '@/views/PostsListPage/ui/PostsList/PostItem/LinkContent/LinkContent'
 import Avatar from '@/shared/ui/Avatar/Avatar'
 import { changeBanUserInCache, getTimeDifference } from '@/shared/lib'
@@ -13,6 +13,7 @@ import { Post } from '@/shared/graphql/__generated__/graphql'
 import { useHandleModals } from '@/shared/lib/hooks/useHandleModals'
 import { useBanUserMutation } from '@/views/PostsListPage/api/banUser.generated'
 import { useUnbanUserMutation } from '@/views/PostsListPage/api/unbanUser.generated'
+import { toast } from 'sonner'
 
 type Props = {
   post: Post
@@ -65,12 +66,28 @@ export const PostItem = ({ post }: Props) => {
   }
 
   const handleBanUser = async () => {
-    await banUserFunc({variables: {userId: post.ownerId, banReason: banValue}})
+    await banUserFunc({variables: {userId: post.ownerId, banReason: banValue}}).catch((err) => {
+      toast.custom(() => (
+        <AlertToast
+          variant="error"
+          title={`Ошибка бана пользователя ${post.postOwner.id}`}
+          description={err.message}
+        />
+      ))
+    })
     handleCloseAgreementModal(false)
   }
 
   const handleUnBanUser = async () => {
-    await unbanUserFunc({variables: {userId: post.ownerId}})
+    await unbanUserFunc({variables: {userId: post.ownerId}}).catch((err) => {
+      toast.custom(() => (
+        <AlertToast
+          variant="error"
+          title={`Ошибка разбана пользователя ${post.postOwner.id}`}
+          description={err.message}
+        />
+      ))
+    })
     handleCloseAgreementModal(false)
   }
 
