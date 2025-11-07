@@ -26,11 +26,13 @@ export const PostItem = ({ post }: Props) => {
   const [banValue, setBanValue] = useState('')
   const [banUserFunc, {loading: loadingBun}] = useBanUserMutation({
     update(cache, {data}) {
+      if (!data) return
       changeBanUserInCache(cache, post.ownerId, data?.banUser)
     }
   })
   const [unbanUserFunc, {loading: loadingUnBun}] = useUnbanUserMutation({
     update(cache, { data }) {
+      if (!data) return
       changeBanUserInCache(cache, post.ownerId, data?.unbanUser)
     }
   })
