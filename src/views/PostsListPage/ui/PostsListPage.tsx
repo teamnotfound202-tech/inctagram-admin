@@ -29,7 +29,6 @@ export const PostsListPage = () => {
   }, [valueDebounced, refetch])
 
   const changeCursorId = (value: number) => setCursorId(value)
-
   return (
     <div className={s.postsListPage}>
       <Input

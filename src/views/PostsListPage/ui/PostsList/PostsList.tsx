@@ -18,7 +18,7 @@ export const PostsList = ({
   cursorId,
   changeCursorIdAction
 }: Props) => {
-  const { data, fetchMore} = useGetPostsQuery({
+  const { data, fetchMore, loading} = useGetPostsQuery({
     variables: {
       endCursorPostId: cursorId,
       searchTerm: value,
@@ -47,7 +47,7 @@ export const PostsList = ({
   const handleNextPosts = useCallback(() => {
     if (data) {
       const id = data?.getPosts.items[data.getPosts.items.length - 1].id
-      if (isNextPage && id) {
+      if (isNextPage && id && id !== cursorId) {
         fetchMore({
           variables: { endCursorPostId: id, searchTerm: value },
         })
@@ -55,10 +55,10 @@ export const PostsList = ({
         setCurrentCount((perCount) => perCount + 1)
       }
     }
-  }, [data, fetchMore, isNextPage, value, changeCursorIdAction])
+  }, [data, fetchMore, isNextPage, value, changeCursorIdAction, cursorId])
 
   const listsRef = useInfiniteScroll({ func: handleNextPosts })
-
+  console.log(cursorId)
   return (
     <>
       <ul className={s.userPostsList}>
@@ -67,7 +67,7 @@ export const PostsList = ({
         ))}
       </ul>
       {!data?.getPosts.items || (data?.getPosts.items.length === 0 && <div>No posts</div>)}
-      {isNextPage && (
+      {(isNextPage && !loading) && (
         <div ref={listsRef}>
           <Spinner type="secondary" size={16} label={'Loading...'} fullWidth center />
         </div>
