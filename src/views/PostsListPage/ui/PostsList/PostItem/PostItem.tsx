@@ -108,7 +108,7 @@ export const PostItem = ({ post }: Props) => {
             </p>
           </div>
           {post.userBan ? (
-            <button className={s.userInfoBtn} onClick={handleUnBanUser} disabled={loadingBun|| loadingUnBun}>
+            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'unban')} disabled={loadingBun|| loadingUnBun}>
               <UnBanIcon/>
             </button>
           ) : (
@@ -147,7 +147,7 @@ export const PostItem = ({ post }: Props) => {
           userName={post.postOwner.userName}
           handleCloseAgreementModal={handleCloseAgreementModal}
           onValueChange={changeBanCause}
-          onClick={handleBanUser}
+          onClick={post.userBan ? handleUnBanUser : handleBanUser}
           disabled={loadingBun}
         />
       )}
