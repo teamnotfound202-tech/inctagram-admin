@@ -1,4 +1,4 @@
-import { Modal, SelectBox } from '@/shared/ui'
+import { Input, Modal, SelectBox } from '@/shared/ui'
 import {Button} from '@/shared/ui'
 import s from './ModalAgreement.module.scss'
 import {AgreementsType} from '@/shared/shared-types'
@@ -10,7 +10,10 @@ type Props = {
     handleCloseAgreementModal: (value: boolean) => void
     onClick: () => void
     onValueChange:(value: string) => void
-    disabled?: boolean
+    disabled?: boolean,
+    banValue?: string | false
+    changeAnotherValue?: (value: string) => void
+    anotherValue?: string
 }
 
 export const ModalAgreement = ({
@@ -19,7 +22,10 @@ export const ModalAgreement = ({
    handleCloseAgreementModal,
    onClick,
    onValueChange,
-   disabled
+   disabled,
+   banValue,
+   changeAnotherValue,
+   anotherValue
 }: Props) => {
 
     const changeTypeTitle = (type: AgreementsType) => {
@@ -65,6 +71,9 @@ export const ModalAgreement = ({
                         placeholder={'Reason for ban'}
                         onValueChange={onValueChange}
                     />
+                )}
+                {banValue === 'Another reason'  && (
+                  <Input id={'banUser'} type={'text'} value={anotherValue} onChange={(e) =>changeAnotherValue?.(e.target.value)}/>
                 )}
                 <div className={s.btnWrapperAgreementModal}>
                     <Button className={s.btnAgreementModal} variant={'primary'} onClick={() => handleCloseAgreementModal(false)} disabled={disabled}>No</Button>

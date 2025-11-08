@@ -25,6 +25,7 @@ const maxLetters = 210
 export const PostItem = ({ post }: Props) => {
   const [text, setText] = useState('Show more')
   const [banValue, setBanValue] = useState('')
+  const [anotherValue, setAnotherValue] = useState('')
   const [banUserFunc, {loading: loadingBun}] = useBanUserMutation({
     update(cache, {data}, {variables}) {
       if (!data || !variables) return
@@ -65,8 +66,12 @@ export const PostItem = ({ post }: Props) => {
     setBanValue(value)
   }
 
+  const changeAnotherValue = (value: string) => {
+    setAnotherValue(value)
+  }
+
   const handleBanUser = async () => {
-    await banUserFunc({variables: {userId: post.ownerId, banReason: banValue}}).catch((err) => {
+    await banUserFunc({variables: {userId: post.ownerId, banReason: banValue === 'Another reason' ? anotherValue : banValue}}).catch((err) => {
       toast.custom(() => (
         <AlertToast
           variant="error"
@@ -149,6 +154,9 @@ export const PostItem = ({ post }: Props) => {
           onValueChange={changeBanCause}
           onClick={post.userBan ? handleUnBanUser : handleBanUser}
           disabled={loadingBun || (!post.userBan && !banValue)}
+          banValue={!post.userBan && banValue}
+          changeAnotherValue={changeAnotherValue}
+          anotherValue={anotherValue}
         />
       )}
     </>
