@@ -26,15 +26,15 @@ export const PostItem = ({ post }: Props) => {
   const [text, setText] = useState('Show more')
   const [banValue, setBanValue] = useState('')
   const [banUserFunc, {loading: loadingBun}] = useBanUserMutation({
-    update(cache, {data}) {
-      if (!data) return
-      changeBanUserInCache(cache, post.ownerId, data?.banUser)
+    update(cache, {data}, {variables}) {
+      if (!data || !variables) return
+      changeBanUserInCache(cache, {userId: variables.userId, banReason: variables.banReason})
     }
   })
   const [unbanUserFunc, {loading: loadingUnBun}] = useUnbanUserMutation({
-    update(cache, { data }) {
-      if (!data) return
-      changeBanUserInCache(cache, post.ownerId, data?.unbanUser)
+    update(cache, { data }, {variables}) {
+      if (!data || !variables) return
+      changeBanUserInCache(cache, {userId: variables.userId})
     }
   })
   const {
@@ -148,7 +148,7 @@ export const PostItem = ({ post }: Props) => {
           handleCloseAgreementModal={handleCloseAgreementModal}
           onValueChange={changeBanCause}
           onClick={post.userBan ? handleUnBanUser : handleBanUser}
-          disabled={loadingBun}
+          disabled={loadingBun || (!post.userBan && !banValue)}
         />
       )}
     </>
