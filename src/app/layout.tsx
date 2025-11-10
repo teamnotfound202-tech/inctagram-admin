@@ -39,6 +39,7 @@ export default function RootLayout({
               {children}
               <Toaster />
             </main>
+            <div id='modal-root'/>
           </AlertsProvider>
         </ApolloProvider>
       </body>

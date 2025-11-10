@@ -5,6 +5,7 @@ import {AgreementsType} from '@/shared/shared-types'
 
 
 type Props = {
+    isOpen: boolean
     type: AgreementsType
     userName: string
     handleCloseAgreementModal: (value: boolean) => void
@@ -25,7 +26,8 @@ export const ModalAgreement = ({
    disabled,
    banValue,
    changeAnotherValue,
-   anotherValue
+   anotherValue,
+   isOpen
 }: Props) => {
 
     const changeTypeTitle = (type: AgreementsType) => {
@@ -53,6 +55,7 @@ export const ModalAgreement = ({
 
     return (
         <Modal
+            isOpen={isOpen}
             title={changeTypeTitle(type).title}
             onClick={() => handleCloseAgreementModal(false)}
         >

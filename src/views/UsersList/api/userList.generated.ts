@@ -14,7 +14,7 @@ export type GetUsersQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'Query', getUsers: { __typename?: 'UsersPaginationModel', users: Array<{ __typename?: 'User', id: number, userName: string, createdAt: ISOStringFormat, email: string, userBan?: { __typename?: 'UserBan', reason: string, createdAt: ISOStringFormat } | null }>, pagination: { __typename?: 'PaginationModel', totalCount: number, pagesCount: number, page: number } } };
+export type GetUsersQuery = { __typename?: 'Query', getUsers: { __typename?: 'UsersPaginationModel', users: Array<{ __typename?: 'User', id: number, userName: string, createdAt: ISOStringFormat, email: string, profile: { __typename?: 'Profile', id: number, createdAt: ISOStringFormat }, userBan?: { __typename?: 'UserBan', reason: string, createdAt: ISOStringFormat } | null }>, pagination: { __typename?: 'PaginationModel', totalCount: number, pagesCount: number, page: number } } };
 
 
 export const GetUsersDocument = gql`
@@ -32,6 +32,10 @@ export const GetUsersDocument = gql`
       userName
       createdAt
       email
+      profile {
+        id
+        createdAt
+      }
       userBan {
         reason
         createdAt

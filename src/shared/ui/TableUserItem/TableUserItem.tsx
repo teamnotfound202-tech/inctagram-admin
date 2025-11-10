@@ -5,12 +5,13 @@ import s from './TableUserItem.module.scss'
 import BanIcon from './icons/ban.svg'
 import BtnIcon from './icons/btn.svg'
 import Link from 'next/link'
-import type { AgreementsType, UserType } from '@/shared/shared-types'
+import type { AgreementsType } from '@/shared/shared-types'
 import { useHandleModals } from '@/shared/lib/hooks/useHandleModals'
+import { User } from '@/shared/graphql'
 
 type Props = {
     profileLink: string
-    user:  UserType
+    user:  User
 }
 
 export const TableUserItem = ({profileLink, user}: Props) => {

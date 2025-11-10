@@ -146,8 +146,9 @@ export const PostItem = ({ post }: Props) => {
           )}
         </p>
       </li>
-      {isOpenAgreementModal && (
+
         <ModalAgreement
+          isOpen={isOpenAgreementModal}
           type={post.userBan ? 'unban' : 'ban'}
           userName={post.postOwner.userName}
           handleCloseAgreementModal={handleCloseAgreementModal}
@@ -158,7 +159,6 @@ export const PostItem = ({ post }: Props) => {
           changeAnotherValue={changeAnotherValue}
           anotherValue={anotherValue}
         />
-      )}
     </>
   )
 }
