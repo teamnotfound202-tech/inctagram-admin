@@ -1,6 +1,6 @@
 export { LoginPage } from './LoginPage/ui/LoginPage'
 export { UsersList } from './UsersList/ui/UsersList'
 export { UserInformation} from './MoreInformations/UserInformation/UserInformation'
-export {PostsListPage} from '@/views/PostsListPage/ui/PostsListPage'
-export {PaymentsList} from './PaymentsList/PaymentsList'
+export {PostsListPage} from './PostsListPage/ui/PostsListPage'
+export {PaymentsList} from './PaymentsList/ui/PaymentsList'
 export {Statistics} from './Statistics/Statistics'

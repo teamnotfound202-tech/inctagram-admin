@@ -18,7 +18,7 @@ export const PostsListPage = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
         setValueDebounced(value)
-      }, 500);
+      }, 1500);
       return () => {
         clearTimeout(timerId);
       }

@@ -1,24 +1,25 @@
-import * as Types from '../../../shared/graphql/__generated__/graphql';
+import * as Types from '../../../shared/graphql/__generated__/graphql'
+import { gql } from '@apollo/client'
+import * as ApolloReactHooks from '@apollo/client/react'
 
-import { gql } from '@apollo/client';
-import * as ApolloReactHooks from '@apollo/client/react';
-const defaultOptions = {} as const;
+const defaultOptions = {} as const
 export type LogInMutationVariables = Types.Exact<{
-  email: Types.Scalars['String']['input'];
-  password: Types.Scalars['String']['input'];
-}>;
+  email: Types.Scalars['String']['input']
+  password: Types.Scalars['String']['input']
+}>
 
-
-export type LogInMutation = { __typename?: 'Mutation', loginAdmin: { __typename?: 'LoginAdmin', logged: boolean } };
-
+export type LogInMutation = {
+  __typename?: 'Mutation'
+  loginAdmin: { __typename?: 'LoginAdmin'; logged: boolean }
+}
 
 export const LogInDocument = gql`
-    mutation LogIn($email: String!, $password: String!) {
-  loginAdmin(email: $email, password: $password) {
-    logged
+  mutation LogIn($email: String!, $password: String!) {
+    loginAdmin(email: $email, password: $password) {
+      logged
+    }
   }
-}
-    `;
+`
 
 /**
  * __useLogInMutation__
@@ -38,8 +39,10 @@ export const LogInDocument = gql`
  *   },
  * });
  */
-export function useLogInMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LogInMutation, LogInMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument, options);
-      }
-export type LogInMutationHookResult = ReturnType<typeof useLogInMutation>;
+export function useLogInMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<LogInMutation, LogInMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument, options)
+}
+export type LogInMutationHookResult = ReturnType<typeof useLogInMutation>

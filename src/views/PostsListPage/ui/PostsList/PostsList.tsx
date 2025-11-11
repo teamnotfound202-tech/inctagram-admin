@@ -48,6 +48,7 @@ export const PostsList = ({
   const handleNextPosts = useCallback(() => {
     if (data) {
       const id = data?.getPosts.items[data.getPosts.items.length - 1].id
+
       if (isNextPage && id) {
         setPostsLoading(true)
         fetchMore({

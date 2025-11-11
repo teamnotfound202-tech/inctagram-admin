@@ -1,22 +1,20 @@
-import * as Types from '../../../shared/graphql/__generated__/graphql';
+import * as Types from '../../../shared/graphql/__generated__/graphql'
+import { gql } from '@apollo/client'
+import * as ApolloReactHooks from '@apollo/client/react'
 
-import { gql } from '@apollo/client';
-import * as ApolloReactHooks from '@apollo/client/react';
-const defaultOptions = {} as const;
+const defaultOptions = {} as const
 export type BanUserMutationVariables = Types.Exact<{
-  banReason: Types.Scalars['String']['input'];
-  userId: Types.Scalars['Int']['input'];
-}>;
+  banReason: Types.Scalars['String']['input']
+  userId: Types.Scalars['Int']['input']
+}>
 
-
-export type BanUserMutation = { __typename?: 'Mutation', banUser: boolean };
-
+export type BanUserMutation = { __typename?: 'Mutation'; banUser: boolean }
 
 export const BanUserDocument = gql`
-    mutation BanUser($banReason: String!, $userId: Int!) {
-  banUser(banReason: $banReason, userId: $userId)
-}
-    `;
+  mutation BanUser($banReason: String!, $userId: Int!) {
+    banUser(banReason: $banReason, userId: $userId)
+  }
+`
 
 /**
  * __useBanUserMutation__
@@ -36,8 +34,13 @@ export const BanUserDocument = gql`
  *   },
  * });
  */
-export function useBanUserMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<BanUserMutation, BanUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<BanUserMutation, BanUserMutationVariables>(BanUserDocument, options);
-      }
-export type BanUserMutationHookResult = ReturnType<typeof useBanUserMutation>;
+export function useBanUserMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<BanUserMutation, BanUserMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<BanUserMutation, BanUserMutationVariables>(
+    BanUserDocument,
+    options,
+  )
+}
+export type BanUserMutationHookResult = ReturnType<typeof useBanUserMutation>
