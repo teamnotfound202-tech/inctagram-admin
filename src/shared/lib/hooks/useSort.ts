@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { DirectionType, SortBy } from '@/shared/ui/SortButton/SortButton'
 
-
 export const UseSort = () => {
 
   const [sortBy, setSortBy] = useState<SortBy>('created_at')
