@@ -1,5 +1,4 @@
 'use client'
-
 import s from './PaymentsList.module.scss'
 import {
   Avatar,
@@ -14,17 +13,20 @@ import {
   TableRow,
 } from '@/shared/ui'
 import React, { useEffect, useState } from 'react'
-import { DirectionType, SortButton, SortBy } from '@/shared/ui/SortButton/SortButton'
+import { SortButton } from '@/shared/ui/SortButton/SortButton'
 import { useGetPaymentsQuery } from '@/views/PaymentsList/api/getPayments.generated'
 import { SortDirection } from '@/shared/graphql'
+import { UseSort } from '@/shared/lib/hooks/useSort'
+import { useDebounce } from '@/shared/lib/utils/useDebounce'
 
 export const PaymentsList = () => {
   const [page, setPage] = useState(1)
   const [itemsCount, setItemsCount] = useState(10) //Тестовые данные
-  const [sortDirection, setSortDirection] = useState('asc')
   const [searchValue, setSearchValue] = useState('')
-  const [valueDebounced, setValueDebounced] = useState(searchValue)
-  const [sortBy, setSortBy] = useState<SortBy>('created_at')
+
+  const {sortBy, sortDirection, sortDirectionHandler} = UseSort()
+  const debounceValue= useDebounce(searchValue,750)
+
   const { data: paymentsList,refetch } = useGetPaymentsQuery({
     variables: {
       pageSize: itemsCount,
@@ -34,25 +36,15 @@ export const PaymentsList = () => {
       searchTerm: searchValue,
     },
   })
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setValueDebounced(searchValue)
-    }, 1500);
-    return () => {
-      clearTimeout(timerId);
-    }
-  }, [searchValue])
-
-  useEffect(() => {
-    refetch({ searchTerm: valueDebounced })
-  }, [valueDebounced, refetch])
 
   useEffect(() => {
     refetch({
       sortBy: sortBy || 'created_at',
-      sortDirection: (sortDirection as SortDirection)
+      sortDirection: (sortDirection as SortDirection),
+      searchTerm: debounceValue
     })
-  }, [sortBy, sortDirection, refetch])
+  }, [sortBy, sortDirection, refetch, debounceValue])
+
   const pageChangeHandler = (pageNumber: number, count: number) => {
     setPage(pageNumber)
     setItemsCount(count)
@@ -60,15 +52,7 @@ export const PaymentsList = () => {
 const searchValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value.trim())
 }
-const sortDirectionHandler = (direction: DirectionType,type:SortBy) => {
-    if (direction === '' ){
-    setSortDirection('asc')
-  }
-  if (direction === 'asc' ){
-    setSortDirection('desc')
-  }
-    setSortBy(type)
-}
+
   const shownPaymentsList = paymentsList?.getPayments?.items?.map((item)=>(
         <TableRow key={item.id}>
         <TableDataCell className={s.fullNameUser}>

@@ -6,19 +6,21 @@ import { useGetUsersQuery } from '@/views/UsersList/api/userList.generated'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { Input, SelectBox } from '@/shared/ui'
-import { UserBlockStatus } from '@/shared/graphql'
+import { SortDirection, UserBlockStatus } from '@/shared/graphql'
 import { useDebounce } from '@/shared/lib/utils/useDebounce'
+import { UseSort } from '@/shared/lib/hooks/useSort'
 
 export const UsersList = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const {sortBy, sortDirection, sortDirectionHandler} = UseSort()
 
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1)
   const [itemsCount, setItemsCount] = useState(10)
   const [statusFilter, setStatusFilter] = useState('ALL')
   const [searchValue, setSearchValue] = useState('')
 
-  const debounce= useDebounce(searchValue,750)
+  const debounceValue= useDebounce(searchValue,750)
 
   const setParams = (value: number) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -36,7 +38,9 @@ export const UsersList = () => {
       pageNumber: page,
       pageSize: itemsCount,
       statusFilter: statusFilter as UserBlockStatus,
-      searchTerm: debounce,
+      searchTerm: debounceValue,
+      sortBy: sortBy,
+      sortDirection: sortDirection as SortDirection,
     },
   })
 
@@ -74,6 +78,7 @@ export const UsersList = () => {
         page={page}
         itemsCount={itemsCount}
         totalCount={data?.getUsers.pagination.totalCount || 0}
+        sortDirectionHandlerAction={sortDirectionHandler}
       />
     </div>
   )
