@@ -3,17 +3,15 @@
 import s from './PostItem.module.scss'
 import 'swiper/css'
 import { useState } from 'react'
-import { AlertToast, Button, ModalAgreement } from '@/shared/ui'
+import { Button, ModalAgreement } from '@/shared/ui'
 import { LinkContent } from '@/views/PostsListPage/ui/PostsList/PostItem/LinkContent/LinkContent'
 import Avatar from '@/shared/ui/Avatar/Avatar'
-import { changeBanUserInCache, getTimeDifference } from '@/shared/lib'
+import {getTimeDifference } from '@/shared/lib'
 import BanIcon from './icons/ban.svg'
 import UnBanIcon from './icons/unban.svg'
 import { Post } from '@/shared/graphql/__generated__/graphql'
 import { useHandleModals } from '@/shared/lib/hooks/useHandleModals'
-import { useBanUserMutation } from '@/views/PostsListPage/api/banUser.generated'
-import { useUnbanUserMutation } from '@/views/PostsListPage/api/unbanUser.generated'
-import { toast } from 'sonner'
+
 
 type Props = {
   post: Post
@@ -24,20 +22,7 @@ const maxLetters = 210
 
 export const PostItem = ({ post }: Props) => {
   const [text, setText] = useState('Show more')
-  const [banValue, setBanValue] = useState('')
-  const [anotherValue, setAnotherValue] = useState('')
-  const [banUserFunc, {loading: loadingBun}] = useBanUserMutation({
-    update(cache, {data}, {variables}) {
-      if (!data || !variables) return
-      changeBanUserInCache(cache, {userId: variables.userId, banReason: variables.banReason})
-    }
-  })
-  const [unbanUserFunc, {loading: loadingUnBun}] = useUnbanUserMutation({
-    update(cache, { data }, {variables}) {
-      if (!data || !variables) return
-      changeBanUserInCache(cache, {userId: variables.userId})
-    }
-  })
+
   const {
     handleOpenAgreementModal,
     isOpenAgreementModal,
@@ -62,40 +47,6 @@ export const PostItem = ({ post }: Props) => {
 
   const url = post?.postOwner && post?.postOwner?.avatars && post?.postOwner?.avatars[0]?.url
 
-  const changeBanCause = (value: string) => {
-    setBanValue(value)
-  }
-
-  const changeAnotherValue = (value: string) => {
-    setAnotherValue(value)
-  }
-
-  const handleBanUser = async () => {
-    await banUserFunc({variables: {userId: post.ownerId, banReason: banValue === 'Another reason' ? anotherValue : banValue}}).catch((err) => {
-      toast.custom(() => (
-        <AlertToast
-          variant="error"
-          title={`Ошибка бана пользователя ${post.postOwner.id}`}
-          description={err.message}
-        />
-      ))
-    })
-    handleCloseAgreementModal(false)
-  }
-
-  const handleUnBanUser = async () => {
-    await unbanUserFunc({variables: {userId: post.ownerId}}).catch((err) => {
-      toast.custom(() => (
-        <AlertToast
-          variant="error"
-          title={`Ошибка разбана пользователя ${post.postOwner.id}`}
-          description={err.message}
-        />
-      ))
-    })
-    handleCloseAgreementModal(false)
-  }
-
   return (
     <>
       <li className={s.postItem}>
@@ -113,11 +64,11 @@ export const PostItem = ({ post }: Props) => {
             </p>
           </div>
           {post.userBan ? (
-            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'unban')} disabled={loadingBun|| loadingUnBun}>
+            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'unban')}>
               <UnBanIcon/>
             </button>
           ) : (
-            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'ban')} disabled={loadingBun|| loadingUnBun}>
+            <button className={s.userInfoBtn} onClick={() => handleOpenAgreementModal(true, 'ban')}>
               <BanIcon />
             </button>
           )}
@@ -151,13 +102,8 @@ export const PostItem = ({ post }: Props) => {
           isOpen={isOpenAgreementModal}
           type={post.userBan ? 'unban' : 'ban'}
           userName={post.postOwner.userName}
-          handleCloseAgreementModal={handleCloseAgreementModal}
-          onValueChange={changeBanCause}
-          onClick={post.userBan ? handleUnBanUser : handleBanUser}
-          disabled={loadingBun || (!post.userBan && !banValue)}
-          banValue={!post.userBan && banValue}
-          changeAnotherValue={changeAnotherValue}
-          anotherValue={anotherValue}
+          userId={post.ownerId}
+          handleCloseAgreementModalAction={handleCloseAgreementModal}
         />
     </>
   )

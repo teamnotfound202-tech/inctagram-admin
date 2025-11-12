@@ -4,10 +4,11 @@ import { Input, PostsList } from '@/shared/ui'
 import s from './PostsListPage.module.scss'
 import { useEffect, useState } from 'react'
 import { useGetPostsQuery } from '@/views/PostsListPage/api/getPosts.generated'
+import { useDebounce } from '@/shared/lib/utils/useDebounce'
 
 export const PostsListPage = () => {
   const [value, setValue] = useState('')
-  const [valueDebounced, setValueDebounced] = useState(value)
+  const debounce= useDebounce(value,750)
   const [cursorId, setCursorId] = useState(0)
   const {refetch} = useGetPostsQuery({variables: {
       endCursorPostId: cursorId,
@@ -16,17 +17,8 @@ export const PostsListPage = () => {
   )
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
-        setValueDebounced(value)
-      }, 500);
-      return () => {
-        clearTimeout(timerId);
-      }
-  }, [value])
-
-  useEffect(() => {
-    refetch({searchTerm: valueDebounced, endCursorPostId: 0})
-  }, [valueDebounced, refetch])
+    refetch({searchTerm: debounce, endCursorPostId: 0})
+  }, [debounce, refetch])
 
   const changeCursorId = (value: number) => setCursorId(value)
   return (

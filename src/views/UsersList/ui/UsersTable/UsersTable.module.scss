@@ -4,3 +4,11 @@
   margin-bottom: 36px;
   width: 972px;
 }
+.table {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}

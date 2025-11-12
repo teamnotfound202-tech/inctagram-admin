@@ -1,21 +1,19 @@
-import * as Types from '../../../shared/graphql/__generated__/graphql';
+import * as Types from '../../../shared/graphql/__generated__/graphql'
+import { gql } from '@apollo/client'
+import * as ApolloReactHooks from '@apollo/client/react'
 
-import { gql } from '@apollo/client';
-import * as ApolloReactHooks from '@apollo/client/react';
-const defaultOptions = {} as const;
+const defaultOptions = {} as const
 export type UnbanUserMutationVariables = Types.Exact<{
-  userId: Types.Scalars['Int']['input'];
-}>;
+  userId: Types.Scalars['Int']['input']
+}>
 
-
-export type UnbanUserMutation = { __typename?: 'Mutation', unbanUser: boolean };
-
+export type UnbanUserMutation = { __typename?: 'Mutation'; unbanUser: boolean }
 
 export const UnbanUserDocument = gql`
-    mutation UnbanUser($userId: Int!) {
-  unbanUser(userId: $userId)
-}
-    `;
+  mutation UnbanUser($userId: Int!) {
+    unbanUser(userId: $userId)
+  }
+`
 
 /**
  * __useUnbanUserMutation__
@@ -34,8 +32,13 @@ export const UnbanUserDocument = gql`
  *   },
  * });
  */
-export function useUnbanUserMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UnbanUserMutation, UnbanUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<UnbanUserMutation, UnbanUserMutationVariables>(UnbanUserDocument, options);
-      }
-export type UnbanUserMutationHookResult = ReturnType<typeof useUnbanUserMutation>;
+export function useUnbanUserMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<UnbanUserMutation, UnbanUserMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<UnbanUserMutation, UnbanUserMutationVariables>(
+    UnbanUserDocument,
+    options,
+  )
+}
+export type UnbanUserMutationHookResult = ReturnType<typeof useUnbanUserMutation>

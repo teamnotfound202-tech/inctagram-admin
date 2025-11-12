@@ -35,3 +35,5 @@ query GetUsers(
         }
     }
 }
+
+mutation DeleteUsers($userId:Int!){removeUser(userId: $userId)}

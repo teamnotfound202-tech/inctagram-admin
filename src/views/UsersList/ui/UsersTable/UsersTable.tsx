@@ -1,33 +1,37 @@
 'use client'
-import { Table } from '@/shared/ui'
-import { TableHead } from '@/shared/ui'
-import { TableRow } from '@/shared/ui'
-import { TableBody } from '@/shared/ui'
-import { TableH } from '@/shared/ui'
-import { SuperPagination } from '@/shared/ui'
-import { useState } from 'react'
+import {
+  SuperPagination,
+  Table,
+  TableBody,
+  TableH,
+  TableHead,
+  TableRow,
+  TableUserItem,
+} from '@/shared/ui'
 import s from './UsersTable.module.scss'
-import { TableUserItem } from '@/shared/ui'
-import { useGetUsersQuery } from '@/views/UsersList/api/userList.generated'
+import { SortButton } from '@/shared/ui/SortButton/SortButton'
+import { User } from '@/shared/graphql'
+import { createUserLink } from '@/shared/lib/utils/createUserLink'
 
-export const UsersTable = () => {
+type Props = {
+  users: User[]
+  page: number
+  itemsCount: number
+  totalCount: number
+  pageChangeHandlerAction: (page: number, count: number) => void
+}
 
-  const [page, setPage] = useState(1)
-  const [itemsCount, setItemsCount] = useState(10)
-
-  const { data } = useGetUsersQuery({ variables: {pageNumber:page} })
-
-  const pageChangeHandler = (page: number, count: number) => {
-    setPage(page)
-    setItemsCount(count)
-  }
-
-   const showUsers = data?.getUsers.users.map((user) => {
-    const userLink = user.email.split('@')[0]
-    const profileLink = userLink[0].toUpperCase() + userLink.slice(1)
+export const UsersTable = ({
+  users,
+  pageChangeHandlerAction,
+  page,
+  itemsCount,
+  totalCount,
+}: Props) => {
+  const showUsers = users.map((user) => {
+    const profileLink = createUserLink(user.email)
     return <TableUserItem key={user.id} user={user} profileLink={profileLink} />
   })
-
 
   return (
     <div>
@@ -35,10 +39,19 @@ export const UsersTable = () => {
         <TableHead>
           <TableRow>
             <TableH>User ID</TableH>
-            <TableH>Profile link</TableH>
+            <TableH>
+              <div className={s.table}>
+                Profile link
+                <SortButton />
+              </div>
+            </TableH>
             <TableH>Username</TableH>
-            <TableH>Date added</TableH>
-            <TableH />
+            <TableH>
+              <div className={s.table}>
+                Date added
+                <SortButton />
+              </div>
+            </TableH>
             <TableH />
           </TableRow>
         </TableHead>
@@ -47,8 +60,8 @@ export const UsersTable = () => {
       <SuperPagination
         itemsCount={itemsCount}
         page={page}
-        totalCount={data?.getUsers.pagination.totalCount || 0}
-        onChange={pageChangeHandler}
+        totalCount={totalCount}
+        onChange={pageChangeHandlerAction}
       />
     </div>
   )

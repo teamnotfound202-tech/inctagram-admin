@@ -1,7 +1,7 @@
 import s from './SettingsNavLinks.module.scss'
 import {
   SettingNavLinkItem
-} from '@/views/MoreInformations/SettingsPage/SettingsNavLinks/SettingNavLinkItem/SettingNavLinkItem'
+} from '@/views/MoreInformations/ui/SettingsPage/SettingsNavLinks/SettingNavLinkItem/SettingNavLinkItem'
 
 export const SettingsNavLinks = () => {
   return (

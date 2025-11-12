@@ -1,38 +1,49 @@
-import * as Types from '../../../shared/graphql/__generated__/graphql';
+import * as Types from '../../../shared/graphql/__generated__/graphql'
 
-import { ISOStringFormat } from 'date-fns';
-import { gql } from '@apollo/client';
+import { ISOStringFormat } from 'date-fns'
+import { gql } from '@apollo/client'
+import * as ApolloReactHooks from '@apollo/client/react'
 
-import * as ApolloReactHooks from '@apollo/client/react';
-const defaultOptions = {} as const;
-export type PostAddedSubscriptionVariables = Types.Exact<{ [key: string]: never; }>;
+const defaultOptions = {} as const
+export type PostAddedSubscriptionVariables = Types.Exact<{ [key: string]: never }>
 
-
-export type PostAddedSubscription = { __typename?: 'Subscription', postAdded: { __typename?: 'Post', id: number, ownerId: number, description: string, createdAt: ISOStringFormat, updatedAt: ISOStringFormat, postOwner: { __typename?: 'PostOwnerModel', id: number, userName: string }, userBan?: { __typename?: 'UserBan', createdAt: ISOStringFormat, reason: string } | null, images?: Array<{ __typename?: 'ImagePost', url?: string | null }> | null } };
-
-
-export const PostAddedDocument = gql`
-    subscription PostAdded {
-  postAdded {
-    id
-    ownerId
-    description
-    createdAt
-    updatedAt
-    postOwner {
-      id
-      userName
-    }
-    userBan {
-      createdAt
-      reason
-    }
-    images {
-      url
-    }
+export type PostAddedSubscription = {
+  __typename?: 'Subscription'
+  postAdded: {
+    __typename?: 'Post'
+    id: number
+    ownerId: number
+    description: string
+    createdAt: ISOStringFormat
+    updatedAt: ISOStringFormat
+    postOwner: { __typename?: 'PostOwnerModel'; id: number; userName: string }
+    userBan?: { __typename?: 'UserBan'; createdAt: ISOStringFormat; reason: string } | null
+    images?: Array<{ __typename?: 'ImagePost'; url?: string | null }> | null
   }
 }
-    `;
+
+export const PostAddedDocument = gql`
+  subscription PostAdded {
+    postAdded {
+      id
+      ownerId
+      description
+      createdAt
+      updatedAt
+      postOwner {
+        id
+        userName
+      }
+      userBan {
+        createdAt
+        reason
+      }
+      images {
+        url
+      }
+    }
+  }
+`
 
 /**
  * __usePostAddedSubscription__
@@ -49,8 +60,16 @@ export const PostAddedDocument = gql`
  *   },
  * });
  */
-export function usePostAddedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<PostAddedSubscription, PostAddedSubscriptionVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useSubscription<PostAddedSubscription, PostAddedSubscriptionVariables>(PostAddedDocument, options);
-      }
-export type PostAddedSubscriptionHookResult = ReturnType<typeof usePostAddedSubscription>;
+export function usePostAddedSubscription(
+  baseOptions?: ApolloReactHooks.SubscriptionHookOptions<
+    PostAddedSubscription,
+    PostAddedSubscriptionVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSubscription<PostAddedSubscription, PostAddedSubscriptionVariables>(
+    PostAddedDocument,
+    options,
+  )
+}
+export type PostAddedSubscriptionHookResult = ReturnType<typeof usePostAddedSubscription>
