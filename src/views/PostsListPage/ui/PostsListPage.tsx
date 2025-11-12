@@ -31,7 +31,7 @@ export const PostsListPage = () => {
       onChange={(e) =>  setValue(e.target.value)}
       value={value}
     />
-      <PostsList value={value}  cursorId={cursorId} changeCursorIdAction={changeCursorId}/>
+      <PostsList value={debounceValue}  cursorId={cursorId} changeCursorIdAction={changeCursorId}/>
     </div>
   )
 }
