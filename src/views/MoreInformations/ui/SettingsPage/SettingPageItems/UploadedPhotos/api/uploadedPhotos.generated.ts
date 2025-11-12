@@ -75,25 +75,7 @@ export function useGetUploadPhotosByUserLazyQuery(
     GetUploadPhotosByUserQueryVariables
   >(GetUploadPhotosByUserDocument, options)
 }
-export function useGetUploadPhotosByUserSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetUploadPhotosByUserQuery,
-        GetUploadPhotosByUserQueryVariables
-      >,
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useSuspenseQuery<
-    GetUploadPhotosByUserQuery,
-    GetUploadPhotosByUserQueryVariables
-  >(GetUploadPhotosByUserDocument, options)
-}
 export type GetUploadPhotosByUserQueryHookResult = ReturnType<typeof useGetUploadPhotosByUserQuery>
 export type GetUploadPhotosByUserLazyQueryHookResult = ReturnType<
   typeof useGetUploadPhotosByUserLazyQuery
->
-export type GetUploadPhotosByUserSuspenseQueryHookResult = ReturnType<
-  typeof useGetUploadPhotosByUserSuspenseQuery
 >

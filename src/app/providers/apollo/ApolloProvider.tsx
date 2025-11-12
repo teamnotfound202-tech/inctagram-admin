@@ -9,40 +9,6 @@ import { getMainDefinition } from '@apollo/client/utilities'
 
 const HTTP_URL = 'https://inctagram.work/api/v1/graphql'
 const WS_URL = 'ws://inctagram.work/api/v1/graphql'
-//
-// function createApolloClient() {
-//   const httpLink = new HttpLink({
-//     uri: HTTP_URL,
-//     credentials: 'include',
-//   })
-//
-//   const makeAuthToken = () => {
-//     return new ApolloLink((operation, forward) => {
-//       if (typeof window === "undefined") {
-//         return forward(operation);
-//       }
-//       const token = sessionStorage.getItem('token')
-//       operation.setContext(({ headers = {} }) => ({
-//         headers: {
-//           ...headers,
-//           ...(token ? { Authorization: `Basic ${token}` } : {}),
-//         },
-//       }))
-//       return forward(operation)
-//     })
-//   }
-//
-//   const link =
-//     typeof window === "undefined"
-//       ? ApolloLink.from([new SSRMultipartLink({ stripDefer: true }), httpLink])
-//       : ApolloLink.from([makeAuthToken(), httpLink]);
-//
-//   return new ApolloClient({
-//     cache,
-//     link,
-//   })
-// }
-
 
 function makeAuthLink() {
   return new ApolloLink((operation, forward) => {

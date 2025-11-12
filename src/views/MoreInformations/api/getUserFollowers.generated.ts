@@ -109,23 +109,5 @@ export function useGetUserFollowersLazyQuery(
     options,
   )
 }
-export function useGetUserFollowersSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetUserFollowersQuery,
-        GetUserFollowersQueryVariables
-      >,
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useSuspenseQuery<GetUserFollowersQuery, GetUserFollowersQueryVariables>(
-    GetUserFollowersDocument,
-    options,
-  )
-}
 export type GetUserFollowersQueryHookResult = ReturnType<typeof useGetUserFollowersQuery>
 export type GetUserFollowersLazyQueryHookResult = ReturnType<typeof useGetUserFollowersLazyQuery>
-export type GetUserFollowersSuspenseQueryHookResult = ReturnType<
-  typeof useGetUserFollowersSuspenseQuery
->

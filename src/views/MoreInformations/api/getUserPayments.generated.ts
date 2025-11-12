@@ -113,23 +113,6 @@ export function useGetPaymentsByUserLazyQuery(
     options,
   )
 }
-export function useGetPaymentsByUserSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetPaymentsByUserQuery,
-        GetPaymentsByUserQueryVariables
-      >,
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useSuspenseQuery<GetPaymentsByUserQuery, GetPaymentsByUserQueryVariables>(
-    GetPaymentsByUserDocument,
-    options,
-  )
-}
+
 export type GetPaymentsByUserQueryHookResult = ReturnType<typeof useGetPaymentsByUserQuery>
 export type GetPaymentsByUserLazyQueryHookResult = ReturnType<typeof useGetPaymentsByUserLazyQuery>
-export type GetPaymentsByUserSuspenseQueryHookResult = ReturnType<
-  typeof useGetPaymentsByUserSuspenseQuery
->

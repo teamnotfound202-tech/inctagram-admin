@@ -72,18 +72,5 @@ export function useGetUserLazyQuery(
     options,
   )
 }
-export function useGetUserSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<GetUserQuery, GetUserQueryVariables>,
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useSuspenseQuery<GetUserQuery, GetUserQueryVariables>(
-    GetUserDocument,
-    options,
-  )
-}
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>
-export type GetUserSuspenseQueryHookResult = ReturnType<typeof useGetUserSuspenseQuery>
