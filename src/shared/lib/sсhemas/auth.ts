@@ -6,14 +6,12 @@ export const loginSchema = z.object({
   password: z
     .string()
     .min(1, 'Enter your password')
-    .min(6, 'Minimum number of characters 6')
+    .min(4, 'Minimum number of characters 4')
     .max(20, 'Maximum number of characters 20')
-    .regex(/^[A-Za-z0-9!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]+$/, {
+    .regex(/^[A-Za-z0-9]+$/, {
       message: 'Password must contain special characters',
     })
-    .regex(/[0-9]/, 'Must contain number (0-9)')
     .regex(/[a-z]/, 'Must contain lowercase letter (a-z)')
-    .regex(/[A-Z]/, 'Must contain uppercase letter (A-Z)'),
 })
 
 export type LoginInputs = z.infer<typeof loginSchema>

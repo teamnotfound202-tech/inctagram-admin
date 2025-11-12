@@ -3,7 +3,7 @@ import s from './Avatar.module.scss'
 import Image from 'next/image'
 
 type AvatarProps = {
-  src?: string
+  src?: string | null | undefined
   alt: string
   size?: 'very_small' | 'small' | 'medium' | 'large'
   withStatus?: boolean

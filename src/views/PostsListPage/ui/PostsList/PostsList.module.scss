@@ -1,0 +1,12 @@
+.userPostsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 972px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

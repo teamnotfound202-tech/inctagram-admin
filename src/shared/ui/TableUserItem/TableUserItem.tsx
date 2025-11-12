@@ -1,109 +1,78 @@
 'use client'
 
-import { TableRow } from '@/shared/ui'
-import { TableDataCell } from '@/shared/ui'
+import { ModalAgreement, PopUpSettingUser, TableDataCell, TableRow } from '@/shared/ui'
 import s from './TableUserItem.module.scss'
 import BanIcon from './icons/ban.svg'
 import BtnIcon from './icons/btn.svg'
 import Link from 'next/link'
-import {ModalSettingUser} from "@/shared/ui";
-import {useState} from 'react'
-import {ModalAgreement} from '@/shared/ui';
-import type { AgreementsType, UserType } from '@/shared/shared-types'
+import { useHandleModals } from '@/shared/lib/hooks/useHandleModals'
+import { User } from '@/shared/graphql'
+import { DeleteUserModal } from '@/shared/ui/DeleteUserModal/DeleteUserModal'
+import { useState } from 'react'
 
 type Props = {
-    profileLink: string
-    user:  UserType
+  profileLink: string
+  user: User
 }
 
-export const TableUserItem = ({profileLink, user}: Props) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpenAgreementModal, setIsOpenAgreementModal] = useState(false)
-    const [typeModalAgreement, setTypeModalAgreement] = useState<AgreementsType>('ban')
+export const TableUserItem = ({ profileLink, user }: Props) => {
+  const {
+    handleChangeModal,
+    isOpen,
+    handleOpenAgreementModal,
+    isOpenAgreementModal,
+    typeModalAgreement,
+    handleCloseAgreementModal,
+  } = useHandleModals()
 
-    const handleChangeModal = (value: boolean) => {
-        setIsOpen(value)
-    }
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalHandler = (val:boolean)=>{
+    setIsModalOpen(val)
+    handleChangeModal(false)
+  }
+  return (
+    <TableRow>
+      <TableDataCell>
+        <div className={s.idWrapper}>
+          {user.userBan && <BanIcon />}
+          {user.id}
+        </div>
+      </TableDataCell>
+      <TableDataCell>
+        <Link href={''}>{profileLink}</Link>
+      </TableDataCell>
+      <TableDataCell>{user.userName}</TableDataCell>
+      <TableDataCell>{new Date(user.createdAt).toLocaleDateString('ru')}</TableDataCell>
+      <TableDataCell className={s.btnCell}>
+        <button className={s.btn} onClick={() => handleChangeModal(!isOpen)}>
+          <BtnIcon />
+        </button>
+        {isOpen && (
+          <PopUpSettingUser
+            modalHandler={modalHandler}
+            userId={user.id}
+            handleChangeModalAction={handleChangeModal}
+            isOpen={isOpen}
+            handleOpenAgreementModalAction={handleOpenAgreementModal}
+            userBan={user.userBan ?? null}
+          />
+        )}
 
-    const handleOpenAgreementModal = (value: boolean, type: AgreementsType) => {
-        setIsOpenAgreementModal(value)
-        setTypeModalAgreement(type)
-        setIsOpen(!value)
-    }
+        <DeleteUserModal
+          userId={user.id}
+          userName={user.userName}
+          isOpen={isModalOpen}
+          modalHandler={modalHandler}
+        />
 
-    const handleCloseAgreementModal = (value: boolean) => {
-        setIsOpenAgreementModal(value)
-    }
-
-    const handleBanUser = () => {
-        console.log('handleBanUser')
-    }
-
-
-    const handleDeleteUser = () => {
-        console.log('handleDeleteUser')
-    }
-
-
-    const handleUnBanUser = () => {
-        console.log('handleUnBanUser')
-    }
-
-    const choiceFunction = (type: AgreementsType) => {
-        let func;
-        switch (type) {
-            case 'ban':
-                func = handleBanUser
-                break;
-            case 'unban':
-                func = handleUnBanUser
-                break;
-            case 'delete':
-                func = handleDeleteUser
-                break;
-            default:
-                func = () => {}
-        }
-        return func
-    }
-
-    return (
-        <TableRow>
-            <TableDataCell>
-                <div className={s.idWrapper}>
-                    {user.userBan && <BanIcon />}
-                    {user.id}
-                </div>
-            </TableDataCell>
-            <TableDataCell>
-                <Link href={''}>{profileLink}</Link>
-            </TableDataCell>
-            <TableDataCell>{user.userName}</TableDataCell>
-            <TableDataCell>{new Date(user.createdAt).toLocaleDateString('ru')}</TableDataCell>
-            <TableDataCell className={s.btnCell}>
-                <button className={s.btn} onClick={() => handleChangeModal(!isOpen)}>
-                    <BtnIcon />
-                </button>
-                {isOpen && (
-                    <ModalSettingUser
-                        handleChangeModal={handleChangeModal}
-                        isOpen={isOpen}
-                        handleOpenAgreementModal={handleOpenAgreementModal}
-                        userBan={user.userBan}
-                    />
-                )}
-            </TableDataCell>
-            <TableDataCell>
-                {isOpenAgreementModal && (
-                        <ModalAgreement
-                            type={typeModalAgreement}
-                            userName={user.userName}
-                            handleCloseAgreementModal={handleCloseAgreementModal}
-                            onClick={choiceFunction(typeModalAgreement)}
-                        />
-                    )
-                }
-            </TableDataCell>
-        </TableRow>
-    )
+        <ModalAgreement
+          isOpen={isOpenAgreementModal}
+          type={typeModalAgreement}
+          userId={user.id}
+          userName={user.userName}
+          handleCloseAgreementModalAction={handleCloseAgreementModal}
+        />
+      </TableDataCell>
+    </TableRow>
+  )
 }

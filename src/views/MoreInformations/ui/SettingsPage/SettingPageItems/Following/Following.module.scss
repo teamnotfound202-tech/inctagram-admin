@@ -1,0 +1,23 @@
+@use '@/shared/styles/variables' as *;
+
+.usersTable {
+  margin: 36px 0;
+}
+
+.profLinkTable {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.arrowSort {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.underlineUserName {
+  text-decoration: underline;
+}

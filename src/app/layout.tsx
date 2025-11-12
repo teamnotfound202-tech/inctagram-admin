@@ -2,11 +2,10 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@radix-ui/themes/styles.css'
 import './globals.css'
-import {AppWrapper} from '@/porocesses'
-
-import { AlertsProvider } from '@/shared/ui'
+import { AlertsProvider} from '@/shared/ui'
 import { Header } from '@/widgets/Header'
 import { Toaster } from 'sonner'
+import ApolloProvider from '@/app/providers/apollo/ApolloProvider'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -33,13 +32,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <AlertsProvider>
-          <Header />
-          <main className={'main'}>
-            <AppWrapper>{children}</AppWrapper>
-            <Toaster />
-          </main>
-        </AlertsProvider>
+        <ApolloProvider>
+          <AlertsProvider>
+            <Header />
+            <main className={'main'}>
+              {children}
+              <Toaster />
+            </main>
+            <div id='modal-root'/>
+          </AlertsProvider>
+        </ApolloProvider>
       </body>
     </html>
   )
