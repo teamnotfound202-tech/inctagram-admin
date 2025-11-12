@@ -24,6 +24,8 @@ export const cache = new InMemoryCache({
               ]
             }
           },
+
+
         },
         getPostsByUser: {
           keyArgs: ['userId'],

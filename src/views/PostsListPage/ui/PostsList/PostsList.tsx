@@ -48,7 +48,8 @@ export const PostsList = ({
   const handleNextPosts = useCallback(() => {
     if (data) {
       const id = data?.getPosts.items[data.getPosts.items.length - 1].id
-      if (isNextPage && id && id !== cursorId) {
+
+      if (isNextPage && id) {
         setPostsLoading(true)
         fetchMore({
           variables: { endCursorPostId: id, searchTerm: value },
@@ -59,7 +60,7 @@ export const PostsList = ({
         setCurrentCount((perCount) => perCount + 1)
       }
     }
-  }, [data, fetchMore, isNextPage, value, changeCursorIdAction, cursorId])
+  }, [data, fetchMore, isNextPage, value, changeCursorIdAction])
 
   const listsRef = useInfiniteScroll({ func: handleNextPosts })
 

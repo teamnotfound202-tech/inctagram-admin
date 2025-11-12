@@ -4,8 +4,13 @@ import ArrowSortUp from './icons/ArrowSortUp.svg'
 import ArrowSortDown from './icons/ArrowSortDown.svg'
 import ArrowUpDown from './icons/ArrowUpDown.svg'
 import s from './SortButton.module.scss'
+export type SortBy = 'created_at' | 'amount' | 'paymentMethod'| 'userName'
 
-type DirectionType = 'asc' | 'desc'|''
+export type DirectionType = 'asc' | 'desc'|''
+type Props = {
+  changeDirectionCallback?: (direction: DirectionType,type:SortBy) => void,
+  typeofSort?:SortBy
+}
 export const changeDirection = (direction: DirectionType):DirectionType => {
   let value:DirectionType = ''
   switch (direction) {
@@ -23,13 +28,13 @@ export const changeDirection = (direction: DirectionType):DirectionType => {
   }
   return value
 }
-
-export const SortButton = () => {
+export const SortButton = ({changeDirectionCallback,typeofSort}:Props) => {
   const [direction, setDirection] = useState<DirectionType>('')
 
   const handleClick = ()=>{
     const nextDirection:DirectionType = changeDirection(direction)
     setDirection(nextDirection)
+    changeDirectionCallback?.(direction,typeofSort??'created_at')
   }
   return (
     <button onClick={handleClick} className={s.button}>
