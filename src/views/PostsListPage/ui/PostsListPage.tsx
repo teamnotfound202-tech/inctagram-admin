@@ -8,7 +8,7 @@ import { useDebounce } from '@/shared/lib/utils/useDebounce'
 
 export const PostsListPage = () => {
   const [value, setValue] = useState('')
-  const debounce= useDebounce(value,750)
+  const debounceValue= useDebounce(value,750)
   const [cursorId, setCursorId] = useState(0)
   const {refetch} = useGetPostsQuery({variables: {
       endCursorPostId: cursorId,
@@ -17,8 +17,8 @@ export const PostsListPage = () => {
   )
 
   useEffect(() => {
-    refetch({searchTerm: debounce, endCursorPostId: 0})
-  }, [debounce, refetch])
+    refetch({searchTerm: debounceValue, endCursorPostId: 0})
+  }, [debounceValue, refetch])
 
   const changeCursorId = (value: number) => setCursorId(value)
   return (

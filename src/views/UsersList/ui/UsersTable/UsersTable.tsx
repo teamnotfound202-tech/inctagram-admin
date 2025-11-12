@@ -9,9 +9,10 @@ import {
   TableUserItem,
 } from '@/shared/ui'
 import s from './UsersTable.module.scss'
-import { SortButton } from '@/shared/ui/SortButton/SortButton'
+import { DirectionType, SortButton, SortBy } from '@/shared/ui/SortButton/SortButton'
 import { User } from '@/shared/graphql'
 import { createUserLink } from '@/shared/lib/utils/createUserLink'
+import React from 'react'
 
 type Props = {
   users: User[]
@@ -19,6 +20,7 @@ type Props = {
   itemsCount: number
   totalCount: number
   pageChangeHandlerAction: (page: number, count: number) => void
+  sortDirectionHandlerAction:(direction: DirectionType,type:SortBy) => void
 }
 
 export const UsersTable = ({
@@ -27,6 +29,7 @@ export const UsersTable = ({
   page,
   itemsCount,
   totalCount,
+  sortDirectionHandlerAction
 }: Props) => {
   const showUsers = users.map((user) => {
     const profileLink = createUserLink(user.email)
@@ -42,14 +45,14 @@ export const UsersTable = ({
             <TableH>
               <div className={s.table}>
                 Profile link
-                <SortButton />
+                <SortButton typeofSort={'userName'} changeDirectionCallback={sortDirectionHandlerAction}/>
               </div>
             </TableH>
             <TableH>Username</TableH>
             <TableH>
               <div className={s.table}>
                 Date added
-                <SortButton />
+                <SortButton typeofSort={'created_at'} changeDirectionCallback={sortDirectionHandlerAction}/>
               </div>
             </TableH>
             <TableH />
