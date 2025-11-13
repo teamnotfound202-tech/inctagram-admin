@@ -119,18 +119,5 @@ export function useGetPostsLazyQuery(
     options,
   )
 }
-export function useGetPostsSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<GetPostsQuery, GetPostsQueryVariables>,
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useSuspenseQuery<GetPostsQuery, GetPostsQueryVariables>(
-    GetPostsDocument,
-    options,
-  )
-}
 export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>
 export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>
-export type GetPostsSuspenseQueryHookResult = ReturnType<typeof useGetPostsSuspenseQuery>
