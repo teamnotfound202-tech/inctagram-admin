@@ -1,0 +1,21 @@
+@use '@/shared/styles/variables.scss' as *;
+
+.idWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn {
+  cursor: pointer;
+  color: $light-100;
+}
+
+.btn:active {
+  color: $accent-500;
+}
+
+.btnCell {
+  position: relative;
+}

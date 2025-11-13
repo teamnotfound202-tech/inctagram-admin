@@ -1,0 +1,1 @@
+export { UserInformation as default } from '@/views'

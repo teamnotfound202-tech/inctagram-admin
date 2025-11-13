@@ -1,0 +1,1 @@
+export {PaymentsList as default} from '@/views'

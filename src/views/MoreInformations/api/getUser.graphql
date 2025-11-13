@@ -1,0 +1,18 @@
+query GetUser(
+    $userId: Int!
+) {
+    getUser(
+        userId: $userId
+    ) {
+        id
+        userName
+        email
+        createdAt
+        profile {
+            avatars {
+                url
+            }
+        }
+
+    }
+}
