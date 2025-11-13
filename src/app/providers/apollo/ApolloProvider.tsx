@@ -7,9 +7,6 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { createClient} from "graphql-ws";
 import { getMainDefinition } from '@apollo/client/utilities'
 
-const HTTP_URL = 'https://inctagram.work/api/v1/graphql'
-const WS_URL = 'ws://inctagram.work/api/v1/graphql'
-
 function makeAuthLink() {
   return new ApolloLink((operation, forward) => {
     if (typeof window === 'undefined') {
@@ -28,7 +25,7 @@ function makeAuthLink() {
 
 function createApolloClient() {
   const httpLink = new HttpLink({
-    uri: HTTP_URL,
+    uri: process.env.NEXT_PUBLIC_HTTP_URL,
     credentials: 'include'
   })
 
@@ -44,7 +41,7 @@ function createApolloClient() {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: WS_URL,
+      url: process.env.NEXT_PUBLIC_WS_URL!,
       connectionParams: () => { // данные для рукопожатия
         const token = sessionStorage.getItem('token')
         return token ? {Authorization: `Basic ${token}`} : {}

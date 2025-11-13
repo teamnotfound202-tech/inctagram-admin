@@ -12,7 +12,9 @@
     "format:check": "prettier . --check",
     "lint-FSD": "npx steiger ./src --watch",
     "prepare": "husky",
-    "codegen": "graphql-codegen"
+    "codegen": "graphql-codegen",
+    "test": "echo \"No tests specified\" && exit 0",
+    "build:production": "next build"
   },
   "dependencies": {
     "@apollo/client": "^4.0.9",
